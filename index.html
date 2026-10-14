@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Andrew Latchman: a CRM record built for the Operations Manager role at Connectd</title>
+<meta name="description" content="An interactive CRM-style record that ties Andrew Latchman's CV to the Operations Manager job description: contact, tickets, dashboards and workflows.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+html[data-theme="dark"]{--bg:#141f2b;--card:#1d2c3b;--line:#35485b;--line2:#2b3c4d;--soft:#263748;--text:#e6edf4;--sub:#9db2c7;--link:#62cde0;--teal:#5cc8c4;--nav:#0d1620;--navon:#14465a;--navonc:#7fdcec;color-scheme:dark}
+:root{--navon:#e5f5f8;--navonc:#00748a;--bri:1;--nav:#2d3e50;--bg:#f5f8fa;--card:#fff;--line:#cbd6e2;--line2:#dfe3eb;--soft:#eaf0f6;--text:#33475b;--sub:#516f90;--link:#0091ae;--teal:#2b9fa0;--o:#ff7a59;--o2:#ff8f73;--od:#e8603f;--green:#00bda5;--amber:#f5c26b;--red:#f2545b;--purple:#8b85dd;
+  --f:"Lexend Deca","Helvetica Neue",Helvetica,Arial,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--f);font-size:14px;line-height:1.5;font-weight:400}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--link);text-decoration:none;cursor:pointer}a:hover{text-decoration:underline}
+[hidden]{display:none!important}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.14em}
+.top{height:48px;background:var(--nav);color:#fff;display:flex;align-items:center;padding:0 14px;position:sticky;top:0;z-index:50}
+.logo{width:30px;height:30px;border-radius:50%;background:var(--o);display:grid;place-items:center;margin-right:10px;flex:none}
+.logo::after{content:"";width:10px;height:10px;border-radius:50%;border:3px solid #fff}
+.menu{display:flex;height:100%}
+.menu a{color:#fff;font-size:13px;font-weight:500;padding:0 13px;display:flex;align-items:center;gap:5px;height:100%;border:0;background:none}
+.menu a:hover{background:rgba(255,255,255,.1);text-decoration:none}.menu a.on{background:rgba(255,255,255,.16)}
+.top .sp{flex:1}.tic{display:flex;gap:2px;align-items:center}
+.tic button{background:none;border:0;color:#fff;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:17px;position:relative}.tic button:hover{background:rgba(255,255,255,.12)}
+.tic button[aria-expanded=true]{background:rgba(255,255,255,.18)}.tic .bd{position:absolute;right:3px;top:3px;background:var(--red);color:#fff;border-radius:50%;width:15px;height:15px;font-size:9px;display:grid;place-items:center}
+.ava{width:30px;height:30px;border-radius:50%;background:var(--o);color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px;margin-left:8px}
+.shell{display:flex;min-height:calc(100vh - 48px)}
+.side{width:206px;background:var(--card);border-right:1px solid var(--line);padding:14px 10px;flex:none;position:sticky;top:48px;height:calc(100vh - 48px);overflow:auto}
+.side h6{margin:6px 10px 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);font-weight:500}
+.side a{display:flex;gap:11px;align-items:center;padding:9px 10px;border-radius:4px;color:var(--text);font-size:14px;font-weight:400;margin-bottom:2px}
+.side a:hover{background:var(--bg);text-decoration:none}.side a.on{background:var(--navon);color:var(--navonc);font-weight:500;box-shadow:inset 3px 0 0 #00a4bd}
+.side a .ct{margin-left:auto;font-size:12px;background:var(--soft);color:var(--sub);border-radius:10px;padding:0 8px}
+.side .note{font-size:12px;color:var(--sub);margin:18px 10px 0;line-height:1.5;border-top:1px solid var(--line2);padding-top:12px}
+.page{flex:1;min-width:0}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:3px;padding:7px 14px;font-size:14px;font-weight:400;display:inline-flex;gap:7px;align-items:center;white-space:nowrap}
+.btn:hover{background:var(--bg)}.btn:focus-visible,[data-a]:focus-visible{outline:2px solid #00a4bd;outline-offset:2px}
+.btn.o{border-color:var(--o);color:var(--o)}.btn.o:hover{background:var(--card)4f1}
+.btn.p{background:var(--o);border-color:var(--o);color:#fff}.btn.p:hover{background:var(--o2)}
+.btn.g{background:var(--soft);border-color:var(--line)}.btn.sm{padding:4px 10px;font-size:13px}
+.sel{border:1px solid #7fd1de;border-radius:3px;background:var(--card);color:var(--text);padding:7px 30px 7px 12px;font:inherit;appearance:none;background-image:linear-gradient(45deg,transparent 50%,#0091ae 50%),linear-gradient(135deg,#0091ae 50%,transparent 50%);background-position:calc(100% - 15px) 55%,calc(100% - 10px) 55%;background-size:5px 5px;background-repeat:no-repeat;cursor:pointer;max-width:260px}
+.inp{border:1px solid var(--line);border-radius:3px;padding:8px 12px 8px 34px;font:inherit;background:var(--card);width:100%}
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:3px;padding:1px 8px;font-size:12px;border:1px solid var(--line2);background:var(--soft);color:var(--text);white-space:nowrap}
+.chip.g{background:#e6f9f6;border-color:#a6e7de;color:#007a6a}.chip.a{background:#fef6e6;border-color:#f6dcaa;color:#8a5a00}.chip.b{background:#eaf0ff;border-color:#c5d3f7;color:#3a55a8}.chip.o{background:var(--card)1ed;border-color:#ffc9bb;color:#b6442a}
+/* contact record */
+.rec{display:grid;grid-template-columns:300px minmax(0,1fr) 340px;min-height:calc(100vh - 48px)}
+.cl{background:var(--card);border-right:1px solid var(--line);padding:18px 20px}
+.cr{background:var(--card);border-left:1px solid var(--line)}
+.cm{padding:18px 22px;min-width:0}
+.cl .back{display:flex;justify-content:space-between;font-size:13px;margin-bottom:14px}
+.who{display:flex;gap:12px;align-items:center}
+.av{width:60px;height:60px;border-radius:50%;background:var(--o);color:#fff;display:grid;place-items:center;font-size:20px;font-weight:500;flex:none}
+.who h1{margin:0;font-size:20px;font-weight:500;line-height:1.2}.who .t{color:var(--sub);font-size:13px}
+.em{font-size:13px;margin:10px 0 14px;color:var(--text)}
+.acts{display:flex;gap:10px;margin:0 0 18px}.acts button{border:0;background:var(--o);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:15px}.acts button:hover{background:var(--od)}
+.cl h4{font-size:13px;font-weight:500;margin:0 0 10px;display:flex;gap:8px;align-items:center;cursor:pointer;color:var(--text);border-bottom:1px solid var(--line2);padding:10px 0;margin-top:6px}
+.prop{margin:0 0 14px}.prop b{display:block;font-weight:400;font-size:12px;color:var(--sub)}.prop span{font-size:14px;display:block;word-break:break-word}
+.cl .bt{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+.srch{position:relative;max-width:300px;flex:1}.srch svg{position:absolute;left:11px;top:11px;color:var(--link)}
+.bar{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:0 0 14px}.tabs button{border:0;background:none;padding:10px 16px;font-size:14px;color:var(--text);border-bottom:2px solid transparent;margin-bottom:-1px}.tabs button.on{border-bottom-color:var(--nav);font-weight:500}
+.flt{font-size:13px;margin:0 0 14px;color:var(--text)}.flt a{margin:0 8px 0 4px}
+.grp{font-size:15px;font-weight:500;margin:20px 0 10px;color:var(--text)}.grp small{font-weight:400;color:var(--sub);font-size:12px;margin-left:8px}
+.act{background:var(--card);border:1px solid var(--line2);border-radius:4px;margin:0 0 10px}
+.act .h{display:flex;gap:9px;align-items:center;padding:11px 14px;cursor:pointer;font-size:13.5px}
+.act .h .ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;flex:none}
+.act .h .d{margin-left:auto;font-size:12px;color:var(--sub);white-space:nowrap}
+.act .h .tx b{font-weight:500}
+.act .b{padding:2px 16px 14px 46px;font-size:13.5px;color:var(--text);border-top:0}
+.act .b p{margin:6px 0}.act .b .m{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0}.act .b .m div{font-size:12px;color:var(--sub)}.act .b .m b{display:block;font-size:18px;color:var(--teal);font-weight:500}
+.act.task .h{padding-right:14px}.ck{width:16px;height:16px;border:1.5px solid var(--sub);border-radius:50%;flex:none;background:var(--card);display:grid;place-items:center;font-size:10px;color:#fff}.ck.on{background:var(--green);border-color:var(--green)}
+.od{color:var(--red);font-size:12px}
+.rc{border-bottom:1px solid var(--line2)}.rc .h{display:flex;align-items:center;gap:8px;padding:14px 18px;cursor:pointer;font-size:13.5px;font-weight:500}.rc .h .l{margin-left:auto;font-weight:400;font-size:13px}
+.rc .b{padding:0 18px 14px 36px;font-size:13px}.rc .b div{padding:5px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.car{transition:transform .15s;display:inline-block}.car.open{transform:rotate(90deg)}
+/* tickets */
+.pg{padding:20px 28px 40px}
+.ttl{display:flex;align-items:center;gap:12px;margin:0 0 18px;flex-wrap:wrap}.ttl h1{margin:0;font-size:26px;font-weight:400;color:var(--teal)}.ttl .sp{flex:1}
+.vt{display:inline-flex}.vt button{border:1px solid var(--line);background:var(--card);width:34px;height:34px;display:grid;place-items:center;color:var(--sub)}.vt button.on{background:var(--soft);color:var(--text)}.vt button:first-child{border-radius:3px 0 0 3px}.vt button:last-child{border-radius:0 3px 3px 0;border-left:0}
+.fl{display:flex;gap:10px;align-items:center;margin:0 0 14px;flex-wrap:wrap}.fl .srch{max-width:230px}
+.fp{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;margin:0 0 14px;display:flex;gap:14px;flex-wrap:wrap;box-shadow:0 4px 14px rgba(45,62,80,.1)}
+.fp label{font-size:12px;color:var(--sub);display:block;margin-bottom:3px}
+.board{display:flex;background:var(--card);border:1px solid var(--line);overflow-x:auto;min-height:520px}
+.bc{flex:1 1 0;min-width:240px;border-right:1px solid var(--line)}.bc:last-child{border-right:0}.bc.cl2{flex:0 0 54px;min-width:54px}
+.bc .hd{background:var(--bg);border-bottom:1px solid var(--line);padding:11px 14px;font-size:12px;font-weight:500;color:var(--sub);display:flex;gap:8px;align-items:center;text-transform:uppercase;letter-spacing:.02em}
+.bc .hd .n{margin-left:auto;display:flex;gap:4px;align-items:center;color:var(--sub)}
+.bc .bd{padding:8px;display:flex;flex-direction:column;gap:6px;background:var(--card)}
+.tk{border:1px solid var(--line);border-radius:3px;background:var(--card);padding:10px 12px;cursor:pointer;font-size:13px;box-shadow:0 1px 2px rgba(45,62,80,.06)}.tk:hover{box-shadow:0 4px 12px rgba(45,62,80,.16)}
+.tk .tt{color:var(--link);font-weight:500;display:block;margin-bottom:5px;line-height:1.35}.tk .r{color:var(--text)}.tk .r b{font-weight:500}
+.tk .flag{margin:-10px -12px 8px;padding:5px 12px;background:var(--soft);font-size:10.5px;letter-spacing:.04em;color:var(--sub);text-transform:uppercase}
+.tk.fresh{animation:fresh 2.2s ease-out}@keyframes fresh{0%{box-shadow:0 0 0 3px var(--o)}100%{box-shadow:0 1px 2px rgba(45,62,80,.06)}}.tk .pr{display:flex;gap:6px;align-items:center;justify-content:flex-end;margin-top:4px;font-size:12px;color:var(--sub)}.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.tbl{width:100%;background:var(--card);border:1px solid var(--line);border-collapse:collapse}.tbl th{background:var(--bg);text-align:left;font-size:12px;font-weight:500;color:var(--sub);padding:10px 14px;border-bottom:1px solid var(--line);text-transform:uppercase}.tbl td{padding:12px 14px;border-bottom:1px solid var(--line2);font-size:13.5px}.tbl tbody tr{cursor:pointer}.tbl tbody tr:hover{background:var(--bg)}
+.drawer{position:fixed;right:0;top:48px;bottom:0;width:min(560px,100%);background:var(--card);z-index:60;box-shadow:-8px 0 30px rgba(45,62,80,.22);overflow:auto}
+.shade{position:fixed;left:0;right:0;top:48px;bottom:0;background:rgba(45,62,80,.3);z-index:59}
+.drawer .dh{background:var(--nav);color:#fff;padding:16px 22px;position:sticky;top:0;z-index:2}.drawer .dh h2{margin:4px 40px 0 0;font-size:18px;font-weight:500;line-height:1.3}.drawer .dh small{opacity:.8;font-size:12px}
+.dx{position:absolute;right:14px;top:12px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:18px;display:grid;place-items:center}.dx:hover{background:rgba(255,255,255,.3)}
+.dnav{display:flex;gap:8px;margin-top:10px}.dnav button{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:3px;padding:4px 10px;font-size:12px}
+.db{padding:18px 22px 40px}.db h5{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);font-weight:500;margin:20px 0 8px}.db h5:first-child{margin-top:0}
+.pp{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}.pp div{font-size:13.5px}.pp b{display:block;font-weight:400;font-size:12px;color:var(--sub)}
+.km{display:flex;gap:10px;flex-wrap:wrap}.km div{border:1px solid var(--line2);border-radius:3px;padding:10px 14px;min-width:110px}.km b{display:block;font-size:22px;color:var(--teal);font-weight:500;line-height:1.1}.km span{font-size:12px;color:var(--sub)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.modal{position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(45,62,80,.55);z-index:80;display:grid;place-items:center;padding:20px}
+.dlg{background:var(--card);border-radius:4px;width:min(620px,100%);max-height:90vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.dlg .mh{background:var(--nav);color:#fff;padding:14px 20px;display:flex;align-items:center;font-size:16px;font-weight:500}.dlg .mh .dx{position:static;margin-left:auto}
+.dlg .mb{padding:20px}.dlg label{display:block;font-size:12px;color:var(--sub);margin:12px 0 4px}.dlg input,.dlg textarea{width:100%;border:1px solid var(--line);border-radius:3px;padding:9px 12px;font:inherit}.dlg textarea{min-height:110px}
+.dlg .mf{padding:14px 20px;border-top:1px solid var(--line2);display:flex;gap:10px;background:var(--bg)}
+.toast{position:fixed;left:50%;top:62px;transform:translateX(-50%);background:var(--nav);color:#fff;border-radius:4px;padding:11px 20px 11px 16px;z-index:200;font-size:14px;box-shadow:0 8px 24px rgba(10,20,30,.35);border-left:4px solid var(--o);max-width:92vw}
+.tip{position:fixed;z-index:95;background:var(--nav);color:#fff;border-radius:3px;padding:6px 10px;font-size:12px;pointer-events:none;max-width:260px}
+.menu2{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:4px;box-shadow:0 6px 20px rgba(45,62,80,.2);z-index:40;min-width:200px;padding:6px 0}.menu2 a,.menu2 button{display:block;width:100%;text-align:left;padding:8px 16px;border:0;background:none;color:var(--text);font-size:13.5px}.menu2 a:hover,.menu2 button:hover{background:var(--bg);text-decoration:none}
+.rel{position:relative;display:inline-block}
+/* dashboards */
+.dash{display:grid;grid-template-columns:1.25fr .7fr .7fr 1.35fr;gap:14px}
+.dc{background:var(--card);border:1px solid var(--line2);border-radius:4px;padding:16px 18px;min-width:0}.dc h3{margin:0 0 12px;font-size:12.5px;font-weight:500;color:var(--text)}
+.kpi{text-align:center}.kpi h3{text-align:left}.kpi .lb{font-size:11.5px;color:var(--sub);text-transform:uppercase;letter-spacing:.03em}.kpi .nm{font-size:34px;color:var(--teal);font-weight:500;line-height:1.3;margin:6px 0 2px}.kpi .dl{font-size:12.5px;color:var(--sub)}.kpi .dl i{display:inline-block;border:5px solid transparent;border-bottom:8px solid var(--green);border-top:0;margin-right:5px}
+.kpi.click{cursor:pointer}.kpi.click:hover{box-shadow:0 4px 14px rgba(45,62,80,.14)}
+.leg{display:flex;flex-direction:column;gap:5px;font-size:12.5px;margin-top:10px}.leg div{display:flex;gap:8px;align-items:center;cursor:pointer}.leg i{width:10px;height:10px;border-radius:2px;flex:none}
+.hb{display:flex;align-items:center;gap:10px;font-size:13px;margin:7px 0}.hb .l{width:150px;flex:none;color:var(--text)}.hb .t{flex:1;background:var(--soft);height:12px;border-radius:2px;overflow:hidden}.hb .t i{display:block;height:100%;background:var(--o)}.hb .v{width:26px;text-align:right;color:var(--sub)}
+.sg{cursor:pointer}.sg:hover{opacity:.85}
+.fun{display:flex;gap:0;align-items:stretch}.fun div{flex:1;background:var(--soft);padding:12px;text-align:center;font-size:12px;color:var(--sub);clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%,8% 50%)}.fun div:first-child{clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%)}.fun b{display:block;font-size:24px;color:var(--teal);font-weight:500}
+/* workflows */
+.wfh{background:var(--card);border-bottom:1px solid var(--line);padding:12px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.wfh h1{margin:0;font-size:18px;font-weight:500}.sw{width:34px;height:18px;border-radius:9px;background:var(--green);position:relative;display:inline-block}.sw::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--card)}
+.wtabs{background:var(--card);border-bottom:1px solid var(--line);padding:0 22px;display:flex;gap:4px}.wtabs button{border:0;background:none;padding:12px 16px;border-bottom:3px solid transparent;font-size:14px}.wtabs button.on{border-bottom-color:var(--o);font-weight:500}
+.cv{position:relative;overflow:auto;background:var(--soft);background-image:radial-gradient(#d0dbe7 1px,transparent 1px);background-size:20px 20px;min-height:640px}
+.cvi{position:relative;margin:0 auto}
+.nd{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:4px;font-size:12px;color:var(--text);box-shadow:0 1px 3px rgba(45,62,80,.1);transition:box-shadow .2s,border-color .2s}
+.nd.a{border-top:4px solid var(--green);padding:10px 14px 8px;cursor:pointer;display:flex;flex-direction:column}.nd.a .tx{flex:1;overflow:hidden}.nd.a.partial{border-top-color:var(--amber)}.nd.a.ready{border-top-color:#7c98b6}
+.nd .hh{display:flex;gap:8px;align-items:center;font-weight:500;font-size:12px;margin-bottom:8px}.nd .ib{width:24px;height:24px;border-radius:5px;background:#e5e8ff;color:#5a4fcf;display:grid;place-items:center;font-size:13px;flex:none}
+.nd .tx{font-size:12px;line-height:1.45;min-height:34px}.nd .ft{display:flex;align-items:center;gap:10px;color:var(--sub);margin-top:8px;padding-top:8px;font-size:11px}.nd .ft a{margin-left:auto;font-size:12px}
+.nd.t{border-radius:4px;padding:12px 14px;background:var(--soft);border-color:var(--line)}.nd.t .g{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin-top:8px}
+.nd.b{padding:12px 14px;border-radius:4px}.nd.l{display:grid;place-items:center;font-size:12px;border-radius:2px;text-align:center;padding:0 8px;cursor:pointer;background:var(--card)}.nd.l:hover{border-color:var(--o)}
+.nd.e{display:grid;place-items:center;font-size:11px;border-radius:2px}
+.nd.run{border-color:var(--o);box-shadow:0 0 0 3px rgba(255,122,89,.28)}.nd.l.pick{border-color:var(--o);background:var(--card)4f1}.nd.dim{opacity:.4}
+.pl{position:absolute;width:22px;height:22px;border-radius:4px;background:var(--nav);color:#fff;display:grid;place-items:center;font-size:14px;line-height:1;z-index:3;cursor:pointer}
+.cvi svg.ed{position:absolute;left:0;top:0;pointer-events:none}.cvi svg.ed path{fill:none;stroke:#7c98b6;stroke-width:1.6}.cvi svg.ed path.run{stroke:var(--o)!important;stroke-width:2.6!important}
+.testp{position:absolute;right:16px;top:16px;width:300px;background:var(--card);border:1px solid var(--line);border-radius:4px;box-shadow:0 6px 22px rgba(45,62,80,.2);z-index:10;padding:14px 16px;font-size:13px}.testp h4{margin:0 0 8px;font-size:14px;font-weight:500}
+.tr li{margin:4px 0;list-style:none}.tr{padding:0;margin:8px 0 0;max-height:240px;overflow:auto}
+.wsum{max-width:900px;margin:22px auto;padding:0 22px}.wsum .dc{margin-bottom:14px}
+.top,.shell,#layer>*,#login{filter:brightness(var(--bri))}
+html[data-theme="dark"] .chip.g{background:#12403a;border-color:#1c6b61;color:#8fe9dc}html[data-theme="dark"] .chip.a{background:#4a3a14;border-color:#7a5f1f;color:#f6d58c}html[data-theme="dark"] .chip.b{background:#1f2f57;border-color:#34509a;color:#a9c0ff}html[data-theme="dark"] .chip.o{background:#4a2a20;border-color:#8a4a38;color:#ffb9a6}
+html[data-theme="dark"] .btn:hover{background:#26384a}html[data-theme="dark"] .btn.o:hover{background:#3a2a26}html[data-theme="dark"] .btn.g{background:var(--soft)}
+html[data-theme="dark"] .tk:hover,html[data-theme="dark"] .tbl tbody tr:hover{background:#243546}html[data-theme="dark"] .cv{background-image:radial-gradient(#2d4256 1px,transparent 1px)}
+html[data-theme="dark"] .nd.t .g{background:var(--card)}html[data-theme="dark"] .nd .ib{background:#2a2f5c;color:#b9b3ff}
+html[data-theme="dark"] .dlg .mf,html[data-theme="dark"] .bc .hd,html[data-theme="dark"] .tbl th{background:#182534}
+.pop{position:absolute;right:0;top:44px;width:min(280px,86vw);background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:4px;box-shadow:0 10px 30px rgba(10,20,30,.35);z-index:70;padding:14px 16px;font-size:13.5px;text-align:left;font-weight:400}
+.pop .ph{font-weight:500;font-size:14px;margin:0 0 10px;display:flex;align-items:center;gap:8px}.pop .row{display:flex;gap:10px;align-items:flex-start}.pop .ni{background:var(--soft);border-radius:4px;padding:10px 12px;display:flex;gap:10px;cursor:pointer;align-items:flex-start;border:1px solid var(--line2)}
+.pop .ni .d{width:30px;height:30px;border-radius:50%;background:var(--o);color:#fff;display:grid;place-items:center;flex:none;font-size:14px}.pop .ni small{display:block;color:var(--sub);font-size:12px;margin-top:2px}
+.pop label{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin:14px 0 6px}.pop label:first-of-type{margin-top:4px}
+.pop input[type=range]{width:100%;accent-color:var(--o)}.pop .seg2{display:flex;gap:6px}.pop .seg2 button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:3px;padding:7px 0;font-size:13px}.pop .seg2 button.on{border-color:var(--o);color:var(--o);box-shadow:inset 0 0 0 1px var(--o)}
+.pop .sws{display:flex;gap:10px}.pop .sws button{width:28px;height:28px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);padding:0}.pop .sws button.on{box-shadow:0 0 0 2px var(--text)}
+.pop hr{border:0;border-top:1px solid var(--line2);margin:14px 0}
+#login{display:none;position:fixed;left:0;right:0;top:0;bottom:0;z-index:300;background:var(--bg);place-items:center;padding:20px}
+body.out #login{display:grid}body.out .top,body.out .shell,body.out #layer{display:none!important}
+.lg{background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:0 12px 40px rgba(45,62,80,.18);padding:36px 34px;width:min(420px,100%);text-align:center}.lg .logo{margin:0 auto 18px;width:46px;height:46px}.lg .logo::after{width:16px;height:16px;border-width:4px}
+.lg h1{margin:0 0 6px;font-size:22px;font-weight:500}.lg p{margin:0 0 22px;color:var(--sub)}.lg .btn{width:100%;justify-content:center;padding:11px 14px;font-size:15px}
+#printcv{display:none}
+@media print{body>*:not(#printcv){display:none!important}#printcv{display:block!important;font-family:Georgia,serif;color:#000;padding:0;font-size:11pt}#printcv h1{font-size:22pt;margin:0}#printcv h2{font-size:12pt;border-bottom:1px solid #000;margin:14pt 0 6pt;text-transform:uppercase;letter-spacing:.06em}#printcv li{margin:2pt 0}}
+@media (max-width:1180px){.rec{grid-template-columns:260px minmax(0,1fr)}.cr{grid-column:1 / -1;border-left:0;border-top:1px solid var(--line)}.dash{grid-template-columns:1fr 1fr}}
+@media (max-width:820px){
+  .shell{display:block}.side{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;height:auto;display:flex;padding:4px;border-right:0;border-top:1px solid var(--line);z-index:55;justify-content:space-around}.side h6,.side .note{display:none}.side a{flex-direction:column;gap:2px;font-size:11px;padding:6px 8px;margin:0}.side a .ct{display:none}.side a.on{box-shadow:inset 0 3px 0 #00a4bd}
+  .menu{display:none}.rec{display:block}.cl,.cr{border:0}.cm{padding:14px}.pg{padding:14px 12px 90px}.dash{grid-template-columns:1fr}.pp{grid-template-columns:1fr}.wtabs,.wfh{padding-left:12px;padding-right:12px}.rec .cm,.cr{padding-bottom:80px}
+}
+</style>
+</head>
+<body>
+<header class="top"><span class="logo"></span><nav class="menu" id="menu"></nav><span class="sp"></span><div class="tic" id="tic"></div></header>
+<div class="shell"><nav class="side" id="side"></nav><main class="page" id="page"></main></div>
+<div id="layer"></div><div id="printcv"></div><div id="login"></div>
+<script>
+(() => {
+'use strict';
+/* ===== everything in one place: the contact, the achievements (tickets), the JD, the workflows ===== */
+const ME = { name: 'Andrew Latchman', first: 'Andrew', title: 'Program Manager', company: 'Zeelo', email: 'andrew.latchman@hotmail.com', phone: '07954 135529', city: 'London', country: 'United Kingdom', linkedin: 'linkedin.com/in/andrewlatchman9611', initials: 'AL' };
+const RESP = {
+  roadmap: { name: 'Own the Roadmap', short: 'Roadmap', color: '#ec6b4b', jd: 'Have the final say on which operations projects get worked on, and in what order. Build a clear, visible roadmap that links each project to business priorities. Say no, or not yet, to work that will not move the needle.' },
+  impact: { name: 'Own the Impact', short: 'Impact', color: '#5bbcb6', jd: 'Get the most impact out of every project, from scoping through to adoption. Understand what Sales, Account Management, Product, Tech, People and SMT need. Communicate plans, progress and trade-offs. Measure what each project actually delivers.' },
+  solution: { name: 'Choose the Right Solution', short: 'Solution', color: '#8b85dd', jd: 'Pick the most effective, timely and affordable fix for each problem. Balance quick wins against longer-term builds, and buy versus build.' },
+  build: { name: 'Build by Example', short: 'Build', color: '#f6cd7f', jd: 'Demonstrate complex builds and inspire the team to use emerging technologies and more thoughtful fixes.' },
+  ai: { name: 'Lead with an AI-First Mindset', short: 'AI-first', color: '#7fb3d5', jd: 'Look for places where AI builds better, more meaningful solutions, not just faster ones. Know when AI is the right answer and when a simpler fix will do. Help the wider business adopt AI.' },
+  team: { name: 'Lead and Grow the Team', short: 'Team', color: '#b0c1d4', jd: 'Balance larger projects against reactive BAU. Line manage the operations team, building skills and careers. Set clear priorities, standards and ways of working.' }
+};
+const REQ = {
+  R1: ['3 to 5 years in operations, ideally in fast-growing tech, SaaS or marketplaces', 'req'], R2: ['A track record of owning a roadmap and making hard prioritisation calls', 'req'], R3: ['Explains trade-offs to senior leaders and frontline teams alike', 'req'],
+  R4: ['An AI-first attitude, backed by hands-on use of AI tools', 'req'], R5: ['Experience managing people, or clear readiness to step up', 'req'], R6: ['Strong judgement on cost, speed and quality', 'req'],
+  D1: ['Marketplace or platform business experience', 'des'], D2: ['Familiarity with HubSpot and no-code or automation tools', 'des'], D3: ['Experience supporting teams across geographies', 'des'], D4: ['A track record of measuring and reporting impact', 'des']
+};
+const ROLES = {
+  pm: { id: 'pm', title: 'Program Manager', org: 'Zeelo', from: 'Feb 2025', to: 'Present', short: 'Program Mgr', summary: 'Operates with full autonomy inside a two-person PMO, owning delivery across Operations, Product, Commercial, Finance and Data in the UK and US. Go-to for applied AI.', type: 'role' },
+  prodops: { id: 'prodops', title: 'Product Operations Lead', org: 'Zeelo', from: 'Oct 2024', to: 'Feb 2025', short: 'Product Ops', summary: 'Created a connective role between Product and Operations, and moved the business onto a trip-level financial system and company-wide ticketing.', type: 'role' },
+  globalops: { id: 'globalops', title: 'Global Operations Project Lead', org: 'Zeelo', from: 'Nov 2022', to: 'Sep 2024', short: 'Global Ops', summary: 'Led company-wide efficiency and communication projects, supported US market launches, and ran training and cutover programmes for 1,500 drivers.', type: 'role' },
+  opsspec: { id: 'opsspec', title: 'Operations Specialist', org: 'Zeelo', from: 'Oct 2021', to: 'Oct 2022', short: 'Ops Specialist', summary: 'Ran the daily mechanics of the business: invoicing, partner audits and a live portfolio of client programs. Supported the first US launch.', type: 'role' },
+  bliss: { id: 'bliss', title: 'Finance, Operations and HR', org: 'Bliss', from: 'Dec 2019', to: 'Mar 2021', short: 'Bliss', summary: 'Progressed from a short-term contract to Finance and HR Administrator in a small charity team.', type: 'role' },
+  bigham: { id: 'bigham', title: 'Temporary Data Entry', org: "Charlie Bigham's", from: '2019', to: '2019', short: "Bigham's", summary: 'Temporary data entry role at an FMCG food manufacturer.', type: 'role' },
+  earlywmc: { id: 'earlywmc', title: 'Marketing and Business Development Intern', org: 'EarlyWMC Creative Agency', from: '2017', to: '2018', short: 'EarlyWMC', summary: 'Internship supporting marketing and business development at a creative agency.', type: 'role' },
+  uni: { id: 'uni', title: 'BA Business Studies with Marketing, 2:1', org: 'Bournemouth University', from: '2015', to: '2019', short: 'University', summary: 'Degree in Business Studies with Marketing, awarded a 2:1.', type: 'edu' }
+};
+const COMPANIES = [['Zeelo', 'Tech-enabled commuter and school transport'], ['Bliss', 'Charity for premature and sick babies'], ["Charlie Bigham's", 'FMCG food manufacturer'], ['EarlyWMC Creative Agency', 'Creative agency'], ['Bournemouth University', 'University']];
+function T(o){ return Object.assign({ owner: ME.name, tools: [], skills: [], metrics: [], reqs: [], impact: 'Medium' }, o); }
+const TICKETS = [
+  T({ n: 1, subject: 'Big Bang: Monday.com to HubSpot CRM migration', role: 'pm', company: 'Zeelo', when: '2025', stage: 'measured', resp: 'build', impact: 'High', reqs: ['R2', 'D2', 'R6'], tools: ['HubSpot', 'Monday.com'], skills: ['Migration planning', 'Workflow design', 'Change management'], metrics: [['Drivers in the new CRM', '1,500+'], ['Users migrated', '50+'], ['Daily users', '30+']],
+    desc: "Co-led the 'Big Bang' migration from Monday.com to HubSpot: built the new driver CRM, migrated 50+ users and designed the workflows now used daily by 30+ Operations and Service Delivery staff.", outcome: 'One CRM, used every day by the teams who run the service.' }),
+  T({ n: 2, subject: 'Driver training operating model: from status to stage', role: 'pm', company: 'Zeelo', when: '2025', stage: 'measured', resp: 'impact', impact: 'High', reqs: ['R2', 'R3', 'D2', 'D3'], tools: ['HubSpot', 'eduMe', 'Synthesia', 'Canva'], skills: ['Process redesign', 'Content production', 'No-code automation'], metrics: [['Drivers', '1,500'], ['Markets', 'UK and US']],
+    desc: 'Redesigned the driver training operating model for 1,500 drivers across the UK and US, moving from a status-based to a stage-based journey. Wrote the scripts, produced the content in Synthesia and Canva, and helped configure webhook workflows linking HubSpot and eduMe.', outcome: 'A joined-up training journey across two platforms and two countries.' }),
+  T({ n: 3, subject: 'Customer-facing AI chatbot', role: 'pm', company: 'Zeelo', when: '2025', stage: 'measured', resp: 'ai', impact: 'High', reqs: ['R4', 'D4'], tools: ['AI chatbot', 'CSAT'], skills: ['AI solution design', 'Conversation design', 'CSAT analysis'], metrics: [['Sentiment swing', '36%']],
+    desc: 'Mapped, designed and wrote the copy for a customer-facing AI chatbot, then refined it continually using CSAT data.', outcome: 'A 36% swing from negative to positive sentiment following the initial implementation.' }),
+  T({ n: 4, subject: 'Data warehouse to HubSpot: proof of concept', role: 'pm', company: 'Zeelo', when: '2025', stage: 'delivered', resp: 'solution', impact: 'Medium', reqs: ['R6', 'R4', 'D2', 'D4'], tools: ['HubSpot', 'Data warehouse'], skills: ['Proof of concept', 'Data integration', 'Reporting automation'],
+    desc: 'Piloted proof-of-concept integrations between the data warehouse and HubSpot ahead of formal tooling, replacing a manual, error-prone reporting process with an automated pipeline.', outcome: 'The idea proven cheaply before any large commitment.' }),
+  T({ n: 5, subject: 'Post-acquisition integration: one operating model', role: 'pm', company: 'Zeelo', when: '2025', stage: 'adopted', resp: 'team', impact: 'Medium', reqs: ['R3', 'D3'], tools: ['Monday.com'], skills: ['Integration', 'Process standardisation', 'Stakeholder alignment'],
+    desc: 'Migrated operational processes into Monday.com as part of a post-acquisition integration, building a single shared operating model for two newly merged teams.', outcome: 'Two teams working to one way of working.' }),
+  T({ n: 6, subject: 'Cleared the backlog of long-standing operational issues', role: 'pm', company: 'Zeelo', when: '2025', stage: 'delivered', resp: 'roadmap', impact: 'Medium', reqs: ['R2', 'R6'], tools: ['HubSpot'], skills: ['Prioritisation', 'HubSpot configuration', 'Problem solving'],
+    desc: 'Resolved a backlog of long-standing operational issues that had sat unresolved, designing and shipping the fixes directly into HubSpot.', outcome: 'Reactive work cleared without derailing the strategic projects.' }),
+  T({ n: 7, subject: 'Weekly AI newsletter', role: 'pm', company: 'Zeelo', when: '2025', stage: 'adopted', resp: 'ai', impact: 'Medium', reqs: ['R3', 'R4'], tools: ['Claude', 'ChatGPT'], skills: ['Internal communications', 'AI enablement', 'Adoption'],
+    desc: 'Started and ran a weekly AI-themed newsletter to keep engagement high through a high-risk migration, pairing platform walkthroughs with original AI-made content.', outcome: 'A whole business kept engaged, and learning to use AI.' }),
+  T({ n: 8, subject: 'Trip-level financial system migration', role: 'prodops', company: 'Zeelo', when: '2024 to 2025', stage: 'delivered', resp: 'impact', impact: 'Medium', reqs: ['R6'], tools: ['Finance system'], skills: ['Data migration', 'Quality assurance', 'Finance systems'],
+    desc: 'Designed and delivered the move to a new trip-level financial system, personally migrating and QA-ing all underlying data to cut manual reporting time.', outcome: 'Less manual reporting, with quality protected where it mattered.' }),
+  T({ n: 9, subject: 'Company-wide ticketing in HubSpot', role: 'prodops', company: 'Zeelo', when: '2024 to 2025', stage: 'adopted', resp: 'solution', impact: 'Medium', reqs: ['R6', 'R2', 'D2'], tools: ['HubSpot'], skills: ['Service design', 'HubSpot configuration'],
+    desc: 'Replaced an ad-hoc bug-reporting process with a company-wide ticketing system via HubSpot, cutting resolution times on internal product and platform issues.', outcome: 'Configured a tool the business already owned instead of building something new.' }),
+  T({ n: 10, subject: 'Created the Product and Operations connective role', role: 'prodops', company: 'Zeelo', when: '2024 to 2025', stage: 'delivered', resp: 'impact', impact: 'Medium', reqs: ['R2', 'R3'], tools: [], skills: ['Cross-functional leadership', 'Stakeholder management'],
+    desc: 'Created a connective role between Product and Operations, bridging two teams that previously worked apart.', outcome: 'Product and Operations talking to each other.' }),
+  T({ n: 11, subject: 'Ten-module training curriculum', role: 'globalops', company: 'Zeelo', when: '2022 to 2024', stage: 'adopted', resp: 'team', impact: 'Medium', reqs: ['R3', 'R5'], tools: [], skills: ['Training design', 'Assessment design'], metrics: [['Modules', '10'], ['Assessments', '2']],
+    desc: 'Designed and delivered a 10-module training curriculum, with two assessments, to move a core operational process from on-site to remote, cutting ramp-up time for new teams.', outcome: 'Faster ramp-up, and a repeatable way to teach the work.' }),
+  T({ n: 12, subject: 'Login cutover for 1,500 drivers', role: 'globalops', company: 'Zeelo', when: '2022 to 2024', stage: 'measured', resp: 'build', impact: 'High', reqs: ['R2', 'R3'], tools: [], skills: ['Cutover planning', 'UAT', 'Communications'], metrics: [['Drivers', '1,500']],
+    desc: 'Delivered a clean cutover of 1,500 drivers onto an account-based login system, owning user acceptance testing and communications.', outcome: 'A large frontline group moved over cleanly.' }),
+  T({ n: 13, subject: 'Three weeks on the ground for the US launch', role: 'globalops', company: 'Zeelo', when: '2022 to 2024', stage: 'delivered', resp: 'team', impact: 'Medium', reqs: ['D3', 'D1', 'R1'], tools: [], skills: ['Supplier onboarding', 'Training', 'Market launch'], metrics: [['Weeks in the US', '3']],
+    desc: 'Spent three weeks in the US training suppliers and onboarding partners as part of market entry, directly supporting new market launches.', outcome: 'Supply onboarded on the ground, in a new geography.' }),
+  T({ n: 14, subject: 'Company-wide efficiency and communication projects', role: 'globalops', company: 'Zeelo', when: '2022 to 2024', stage: 'adopted', resp: 'roadmap', impact: 'Medium', reqs: ['R1', 'R2'], tools: [], skills: ['Project leadership', 'Communications'],
+    desc: 'Led company-wide efficiency and communication projects with no existing template, spanning the whole business.', outcome: 'Projects chosen, scoped and landed without a playbook.' }),
+  T({ n: 15, subject: 'Global supplier exploration map', role: 'opsspec', company: 'Zeelo', when: '2021 to 2022', stage: 'delivered', resp: 'solution', impact: 'Low', reqs: ['D1', 'D3'], tools: [], skills: ['Data visualisation', 'Market mapping'],
+    desc: 'Built a live global map of supplier exploration to guide expansion decisions.', outcome: 'Expansion decisions made with the supply picture in front of the team.' }),
+  T({ n: 16, subject: 'Sold-out virtual neonatal conference', role: 'bliss', company: 'Bliss', when: '2020 to 2021', stage: 'measured', resp: 'impact', impact: 'Medium', reqs: ['R1'], tools: [], skills: ['Event delivery', 'Payments', 'Scheduling'], metrics: [['Outcome', 'Sold out']],
+    desc: 'Ran a sold-out virtual neonatal conference during Covid, managing ticketing, speaker scheduling and payments.', outcome: 'Significant responsibility early in a career.' }),
+  T({ n: 17, subject: 'Selected for the high-potential leadership cohort', role: 'pm', company: 'Zeelo', when: '2025', stage: 'delivered', resp: 'team', impact: 'High', reqs: ['R5'], tools: [], skills: ['Leadership development', 'Mentoring'],
+    desc: 'Selected for the high-potential leadership cohort, with direct mentorship from C-suite executives, and mentored by the Chief of Staff, Product Director and VP of Data.', outcome: 'A clear readiness to step into line management.' }),
+  T({ n: 18, subject: 'Cross-functional PMO with full autonomy', role: 'pm', company: 'Zeelo', when: '2025', stage: 'adopted', resp: 'roadmap', impact: 'High', reqs: ['R1', 'R2', 'R3', 'D3'], tools: ['HubSpot', 'Monday.com'], skills: ['Prioritisation', 'Stakeholder management', 'Programme delivery'], metrics: [['Teams supported', '5'], ['Markets', 'UK and US']],
+    desc: 'Operates with full autonomy inside a two-person PMO, owning delivery across Operations, Product, Commercial, Finance and Data, and deciding what gets delivered and in what order.', outcome: 'Roadmap ownership across five teams in two markets.' })
+];
+TICKETS.forEach(t => { t.id = 'TCK-' + (1000 + t.n); });
+const TBY = {}; TICKETS.forEach(t => { TBY[t.id] = t; });
+const STAGES = [['delivered', 'DELIVERED', 'Shipped'], ['adopted', 'ADOPTED', 'In daily use'], ['measured', 'MEASURED', 'Result quantified']];
+const SKILL_LISTS = [['Automation and no-code', ['HubSpot', 'Monday.com', 'n8n', 'Zapier', 'eduMe']], ['AI tools', ['Claude', 'ChatGPT', 'Synthesia']], ['Data and reporting', ['Data warehouse', 'CSAT', 'Finance system']], ['People and communication', ['Canva', 'Figma', 'Google Workspace']]];
+/* ---------- workflows: how the skills work together against each responsibility ---------- */
+const ST = { strong: ['Strong evidence', 'g'], partial: ['Partial evidence', 'a'], ready: ['Ready to step up', 'b'] };
+function A(id, col, row, title, skill, text, ev, strength, jd, ic){ return { id, type: 'action', col, row, title, skill, text, ev, strength, jd, ic: ic || 'bolt' }; }
+function L(id, col, row, text){ return { id, type: 'label', col, row, text }; }
+function B(id, col, row, text){ return { id, type: 'branch', col, row, text }; }
+function E(id, col, row){ return { id, type: 'end', col, row }; }
+function TR(id, col, row, text){ return { id, type: 'trigger', col, row, text }; }
+const WF = {
+  roadmap: { name: 'Own the Roadmap', desc: 'Decide what the team works on, in what order, and say no with a reason.', nodes: [
+    TR('t', 1, 0, 'A new request or project idea is raised'),
+    A('a1', 1, 1, 'Understand the need', 'Stakeholder discovery', 'Work with every team to understand what they actually need before choosing how to help.', ['TCK-1018', 'TCK-1010'], 'strong', 'Work with every team to understand what they need.', 'chat'),
+    B('b', 1, 2, 'Branch based on request type'), L('l1', 0, 3, 'Reactive BAU'), L('l2', 1, 3, 'Strategic project'), L('l3', 2, 3, 'Low impact'),
+    A('a2', 0, 4, 'Protect capacity for BAU', 'Prioritisation', 'Keep time free for urgent reactive work so it never crowds out the big projects, and vice versa.', ['TCK-1006', 'TCK-1018'], 'strong', 'Balance larger projects against the steady flow of reactive BAU.', 'shield'),
+    A('a3', 1, 4, 'Weigh impact against effort', 'Prioritisation', 'Score each project on value, effort, cost and time to value, and choose between them.', ['TCK-1018', 'TCK-1014'], 'strong', 'Have the final say on which projects get worked on, and in what order.', 'scale'),
+    A('a4', 2, 4, 'Say no, or not yet, and explain why', 'Judgement', 'Prove ideas cheaply before committing, and hold large builds until the case is clear.', ['TCK-1004'], 'partial', 'Say no, or not yet, to work that will not move the needle, and explain why.', 'stop'),
+    A('a5', 1, 5, 'Decide: now, next or later', 'Roadmap ownership', 'Sequence the work against real capacity and business priorities.', ['TCK-1018', 'TCK-1014'], 'strong', 'Own the operations roadmap end to end.', 'route'),
+    A('a6', 1, 6, 'Make the roadmap visible', 'Communication', 'Keep the business informed of what is coming and why, in language each audience uses.', ['TCK-1007', 'TCK-1018'], 'partial', 'Build and maintain a clear, visible roadmap that links each project to business priorities.', 'eye'),
+    E('e0', 0, 5), E('e1', 1, 7), E('e2', 2, 5)
+  ], edges: [['t', 'a1'], ['a1', 'b'], ['b', 'l1'], ['b', 'l2'], ['b', 'l3'], ['l1', 'a2'], ['l2', 'a3'], ['l3', 'a4'], ['a2', 'e0'], ['a3', 'a5'], ['a5', 'a6'], ['a6', 'e1'], ['a4', 'e2']], branchOf: 'b' },
+  impact: { name: 'Own the Impact', desc: 'From scoping to adoption, and then measure what the project delivered.', nodes: [
+    TR('t', 1, 0, 'A project is approved'),
+    A('a1', 1, 1, 'Scope with the people who will use it', 'Discovery', 'Design the solution with the teams who will run it every day, not for them.', ['TCK-1001', 'TCK-1002'], 'strong', 'Understand what each key stakeholder group needs.', 'chat'),
+    A('a2', 1, 2, 'Build and test', 'Delivery', 'Build, run user acceptance testing and plan the cutover.', ['TCK-1001', 'TCK-1012'], 'strong', 'Get the most impact out of every project, from scoping through to adoption.', 'bolt'),
+    A('a3', 1, 3, 'Drive adoption', 'Adoption', 'Training, walkthroughs and a weekly newsletter keep people engaged through change.', ['TCK-1007', 'TCK-1011', 'TCK-1001'], 'strong', 'Take projects through to adoption.', 'users'),
+    B('b', 1, 4, 'Branch based on the measured result'), L('l1', 0, 5, 'Beat the target'), L('l2', 1, 5, 'Fell short'), L('l3', 2, 5, 'No baseline yet'),
+    A('a4', 0, 6, 'Report the impact', 'Measurement', 'Report results plainly: a 36% sentiment swing, 1,500 drivers moved, 50+ users migrated.', ['TCK-1003', 'TCK-1001'], 'strong', 'Measure what each project actually delivers.', 'chart'),
+    A('a5', 1, 6, 'Iterate with feedback', 'CSAT analysis', 'Use customer satisfaction data to refine the solution continually.', ['TCK-1003'], 'strong', 'Use measured results to shape what comes next.', 'loop'),
+    A('a6', 2, 6, 'Set the baseline first', 'Measurement', 'Replace manual, error-prone reporting so there is a trusted baseline to measure against.', ['TCK-1004'], 'partial', 'Measure what each project actually delivers.', 'chart'),
+    A('a7', 1, 7, 'Feed learning into the next project', 'Communication', 'Share results and trade-offs with senior leaders and frontline teams alike.', ['TCK-1003', 'TCK-1018'], 'partial', 'Communicate plans, progress and trade-offs clearly.', 'chat'),
+    E('e0', 0, 7), E('e1', 1, 8), E('e2', 2, 7)
+  ], edges: [['t', 'a1'], ['a1', 'a2'], ['a2', 'a3'], ['a3', 'b'], ['b', 'l1'], ['b', 'l2'], ['b', 'l3'], ['l1', 'a4'], ['l2', 'a5'], ['l3', 'a6'], ['a4', 'e0'], ['a5', 'a7'], ['a7', 'e1'], ['a6', 'e2']], branchOf: 'b' },
+  solution: { name: 'Choose the Right Solution', desc: 'The most effective, timely and affordable fix: configure, automate, use AI, or build.', nodes: [
+    TR('t', 1.5, 0, 'A problem needs solving'),
+    A('a1', 1.5, 1, 'Define the problem and the cost of waiting', 'Problem framing', 'Understand what is broken, who it affects and what a good outcome looks like.', ['TCK-1006'], 'strong', 'Pick the most effective, timely and affordable fix.', 'target'),
+    B('b', 1.5, 2, 'Branch based on the right fix'), L('l1', 0, 3, 'Configure what we own'), L('l2', 1, 3, 'Automate'), L('l3', 2, 3, 'AI fits'), L('l4', 3, 3, 'Big build'),
+    A('a2', 0, 4, 'Configure the tool you already have', 'HubSpot configuration', 'Company-wide ticketing and fixes shipped straight into HubSpot instead of a new build.', ['TCK-1009', 'TCK-1006'], 'strong', 'Balance quick wins against longer-term builds.', 'cog'),
+    A('a3', 1, 4, 'Automate with no-code', 'No-code automation', 'Webhook workflows between HubSpot and eduMe, plus n8n and Zapier automations.', ['TCK-1002', 'TCK-1004'], 'strong', 'Familiarity with HubSpot and modern no-code or automation tools.', 'bolt'),
+    A('a4', 2, 4, 'Use AI, with a person in the loop', 'AI solution design', 'A customer-facing chatbot refined with CSAT data.', ['TCK-1003'], 'strong', 'Know when AI is the right answer.', 'spark'),
+    A('a5', 3, 4, 'Prove it with a proof of concept', 'Proof of concept', 'Pilot integrations ahead of formal tooling before committing to a large build.', ['TCK-1004'], 'strong', 'Buy versus build.', 'flask'),
+    A('a6', 3, 5, 'Decide: buy, build or consolidate', 'Judgement', 'Consolidated work onto the tools already owned and merged two operating models into one.', ['TCK-1005', 'TCK-1001'], 'partial', 'Balance buy versus build.', 'scale'),
+    A('a7', 1.5, 6, 'Check cost, speed and quality', 'Quality assurance', 'Protect quality where it matters: migrated and QA-ed finance data by hand.', ['TCK-1008'], 'strong', 'Strong judgement on cost, speed and quality.', 'check'),
+    E('e0', 1.5, 7)
+  ], edges: [['t', 'a1'], ['a1', 'b'], ['b', 'l1'], ['b', 'l2'], ['b', 'l3'], ['b', 'l4'], ['l1', 'a2'], ['l2', 'a3'], ['l3', 'a4'], ['l4', 'a5'], ['a5', 'a6'], ['a2', 'a7'], ['a3', 'a7'], ['a4', 'a7'], ['a6', 'a7'], ['a7', 'e0']], branchOf: 'b' },
+  build: { name: 'Build by Example', desc: 'Build the hard thing yourself, then show the team how.', nodes: [
+    TR('t', 0.5, 0, 'A complex build is needed'),
+    A('a1', 0.5, 1, 'Build it hands-on', 'Hands-on delivery', 'A CRM migration for 50+ users and 1,500+ drivers, built and run directly.', ['TCK-1001', 'TCK-1012'], 'strong', 'Demonstrate complex builds.', 'bolt'),
+    B('b', 0.5, 2, 'Branch based on team confidence'), L('l1', 0, 3, 'Needs a walkthrough'), L('l2', 1, 3, 'Ready to own it'),
+    A('a2', 0, 4, 'Show the team how', 'Enablement', 'Weekly walkthroughs and AI-made content so people see what is possible.', ['TCK-1007'], 'strong', 'Inspire the team to use emerging technologies.', 'users'),
+    A('a3', 1, 4, 'Hand over ownership', 'Change management', 'Workflows designed with the teams who now use them every day.', ['TCK-1001', 'TCK-1005'], 'strong', 'Inspire the team to more thoughtful fixes.', 'handshake'),
+    A('a4', 0, 5, 'Teach it', 'Training design', 'A ten-module curriculum with assessments, and scripted video training.', ['TCK-1011', 'TCK-1002'], 'strong', 'Inspire the team to use emerging technologies.', 'cap'),
+    E('e0', 0, 6), E('e1', 1, 5)
+  ], edges: [['t', 'a1'], ['a1', 'b'], ['b', 'l1'], ['b', 'l2'], ['l1', 'a2'], ['l2', 'a3'], ['a2', 'a4'], ['a4', 'e0'], ['a3', 'e1']], branchOf: 'b' },
+  ai: { name: 'Lead with an AI-First Mindset', desc: 'Use AI where it builds something better, and know when a simpler fix will do.', nodes: [
+    TR('t', 1, 0, 'A process or problem is identified'),
+    B('b', 1, 1, 'Branch: is AI the right answer?'), L('l1', 0, 2, 'Yes: repeatable, human in the loop'), L('l2', 1, 2, 'No: a simpler fix will do'), L('l3', 2, 2, 'Not sure yet'),
+    A('a1', 0, 3, 'Design and ship the AI solution', 'AI solution design', 'Mapped, designed and wrote the copy for an AI chatbot.', ['TCK-1003'], 'strong', 'Build better, more meaningful solutions with AI.', 'spark'),
+    A('a2', 1, 3, 'Use a workflow or a process fix', 'Process design', 'A stage-based training journey and HubSpot ticketing: no AI needed.', ['TCK-1002', 'TCK-1009'], 'strong', 'Know when a simpler fix will do.', 'route'),
+    A('a3', 2, 3, 'Pilot, measure, decide', 'Proof of concept', 'Test small and measure before committing.', ['TCK-1004'], 'strong', 'Know when AI is the right answer and when it is not.', 'flask'),
+    A('a4', 0, 4, 'Measure with CSAT', 'CSAT analysis', 'Sentiment moved by 36% and was refined continually with customer satisfaction data.', ['TCK-1003'], 'strong', 'Measure what each project actually delivers.', 'chart'),
+    A('a5', 1, 5, 'Help the business adopt AI', 'AI enablement', 'A weekly AI newsletter, and the go-to person for applied AI across the business.', ['TCK-1007'], 'strong', 'Help the wider business adopt AI tools and ways of working.', 'users'),
+    E('e0', 1, 6)
+  ], edges: [['t', 'b'], ['b', 'l1'], ['b', 'l2'], ['b', 'l3'], ['l1', 'a1'], ['l2', 'a2'], ['l3', 'a3'], ['a1', 'a4'], ['a4', 'a5'], ['a2', 'a5'], ['a3', 'a5'], ['a5', 'e0']], branchOf: 'b' },
+  team: { name: 'Lead and Grow the Team', desc: 'Set the standards, grow people, and step into line management.', nodes: [
+    TR('t', 0.5, 0, 'A team need is identified'),
+    A('a1', 0.5, 1, 'Set standards and ways of working', 'Process standardisation', 'One shared operating model for two merged teams, and a stage-based journey for training.', ['TCK-1005', 'TCK-1002'], 'strong', 'Set clear priorities, standards and ways of working.', 'route'),
+    A('a2', 0.5, 2, 'Coach and upskill', 'Training and enablement', 'A ten-module curriculum and weekly AI walkthroughs for colleagues.', ['TCK-1011', 'TCK-1007'], 'strong', 'Support them, build their skills and grow their careers.', 'cap'),
+    B('b', 0.5, 3, 'Branch based on readiness'), L('l1', 0, 4, 'Today: coaching and mentoring'), L('l2', 1, 4, 'Next step: line management'),
+    A('a3', 0, 5, 'Mentor and share practice', 'Mentoring', 'The go-to for applied AI, supported by a high-potential leadership cohort.', ['TCK-1017', 'TCK-1007'], 'partial', 'Build skills across the team.', 'users'),
+    A('a4', 1, 5, 'Step into line management', 'Leadership', 'Selected for a high-potential leadership cohort with C-suite mentorship. Formal line management is the next step.', ['TCK-1017'], 'ready', 'Line manage the operations team.', 'star'),
+    A('a5', 1, 6, 'Balance projects against BAU', 'Prioritisation', 'Keep the team on the work that matters without neglecting reactive requests.', ['TCK-1018', 'TCK-1006'], 'strong', 'Balance larger projects against reactive BAU requests.', 'scale'),
+    E('e0', 0, 6), E('e1', 1, 7)
+  ], edges: [['t', 'a1'], ['a1', 'a2'], ['a2', 'b'], ['b', 'l1'], ['b', 'l2'], ['l1', 'a3'], ['l2', 'a4'], ['a3', 'e0'], ['a4', 'a5'], ['a5', 'e1']], branchOf: 'b' }
+};
+Object.keys(WF).forEach(k => { WF[k].key = k; WF[k].resp = RESP[k]; });
+
+/* ===== the CRM ===== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const IC = {
+  note: '<path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4"/><path d="M8 12h8M8 16h6"/>', mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/>', phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+  task: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/>', cal: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', ticket: '<path d="M3 9a2 2 0 0 0 0 6v3h18v-3a2 2 0 0 1 0-6V6H3z"/><path d="M13 7v10" stroke-dasharray="2 2"/>', person: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',
+  dash: '<rect x="3" y="3" width="8" height="10" rx="1"/><rect x="13" y="3" width="8" height="6" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/><rect x="3" y="15" width="8" height="6" rx="1"/>', flow: '<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-4h12v4"/>',
+  copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/>', caret: '<path d="M9 6l6 6-6 6"/>', down: '<path d="M6 9l6 6 6-6"/>', list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>', board: '<rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="10" rx="1"/><rect x="17" y="4" width="4" height="13" rx="1"/>',
+  bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/>', shield: '<path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/>', scale: '<path d="M12 4v16M5 8h14M5 8l-3 7h6zM19 8l-3 7h6z"/>', stop: '<circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/>', route: '<circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M6 8v4a4 4 0 0 0 4 4h6"/>',
+  eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>', target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>', cog: '<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
+  spark: '<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>', flask: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>', check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', users: '<circle cx="9" cy="8" r="3.5"/><path d="M2 20c.8-5 12.2-5 14 0"/><circle cx="17" cy="9" r="2.5"/><path d="M18 14c2.5.3 4 2 4 5"/>',
+  chart: '<path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/>', loop: '<path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M20 4v5h-5M4 20v-5h5"/>', handshake: '<path d="M3 12l5-4 4 2 4-2 5 4-8 7z"/>', cap: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 3 9 3 12 0v-5"/>', star: '<path d="M12 3l2.7 5.6 6.3.9-4.6 4.4 1.1 6.1L12 17l-5.5 3 1.1-6.1L3 9.5l6.3-.9z"/>',
+  shop: '<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/>', gear: '<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/>', bell: '<path d="M6 17V11a6 6 0 1 1 12 0v6l2 2H4z"/><path d="M10 21h4"/>', brief: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M3 13h18"/>', plus: '<path d="M12 5v14M5 12h14"/>', print: '<path d="M7 9V3h10v6M7 17H4v-7h16v7h-3"/><rect x="7" y="14" width="10" height="7"/>', link: '<path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/>'
+};
+const ic = (n, extra) => '<svg class="i" viewBox="0 0 24 24"' + (extra ? ' style="' + extra + '"' : '') + '>' + (IC[n] || '') + '</svg>';
+const VIEWS = [['contacts', 'Contacts', 'person', 'Contacts'], ['tickets', 'Tickets', 'ticket', 'Service'], ['dashboards', 'Dashboards', 'dash', 'Reports'], ['workflows', 'Workflows', 'flow', 'Automation']];
+const S = { v: 'contacts', id: null, sub: null, tab: 'activity', open: {}, af: { role: true, ticket: true, edu: true }, aq: '', props: false, rc: { tickets: true, wf: true, play: false, lists: false, companies: false, deals: false, attach: false, source: false, feedback: false }, tasks: {}, tf: { q: '', req: '', company: '', tool: '', impact: '', role: '', view: 'all', pipeline: 'delivery', mode: 'board' }, fp: false, menu: null, drawer: null, modal: null, toastMsg: null, dsh: 'impact', dco: '', wfTab: 'actions', wfTest: false, wfPick: null, wfRun: null, collapsed: {}, saved: null, pop: null, read: false, out: false, mine: [], mineN: 0, flash: null, set: { theme: 'light', accent: 'orange', bri: 100 } };
+function save(){ try { localStorage.setItem('latchmanCrm', JSON.stringify({ tasks: S.tasks, saved: S.saved, set: S.set, mine: S.mine, mineN: S.mineN })); } catch (e) {} }
+(function load(){ try { const d = JSON.parse(localStorage.getItem('latchmanCrm') || 'null'); if (d){ S.tasks = d.tasks || {}; S.saved = d.saved || null; if (d.set) S.set = Object.assign(S.set, d.set); if (Array.isArray(d.mine)){ S.mine = d.mine; S.mineN = d.mineN || d.mine.length; } } } catch (e) {} })();
+const tk = id => TBY[id];
+const urlSet = h => { try { history.replaceState(null, '', h); } catch (e) { /* sandboxed previews block this; the page works without it */ } };
+const toast = m => { S.toastMsg = m; renderLayer(); clearTimeout(toast.t); toast.t = setTimeout(() => { S.toastMsg = null; renderLayer(); }, 2400); };
+
+/* ---------- routing ---------- */
+function sync(p){
+  const h = (p !== undefined ? p : location.hash.replace(/^#\/?/, '')).split('/'), v = VIEWS.find(x => x[0] === h[0]) ? h[0] : 'contacts'; S.v = v; S.id = h[1] || null; S.sub = h[2] || null;
+  if (v === 'tickets' && S.id && TBY[S.id]) S.drawer = { type: 'tk', id: S.id }; else if (S.drawer && S.drawer.type === 'tk') S.drawer = null;
+  if (v === 'dashboards' && S.id) S.dsh = S.id; if (v === 'workflows' && S.id && !WF[S.id]) S.id = null;
+  if (S.lastWf !== (v === 'workflows' ? S.id : null)){ S.wfRun = null; S.wfTest = false; S.wfPick = null; S.lastWf = v === 'workflows' ? S.id : null; }
+  if (v === 'workflows' && S.id && S.sub) S.drawer = { type: 'node', wf: S.id, node: S.sub }; else if (S.drawer && S.drawer.type === 'node') S.drawer = null;
+}
+function go(path){ const t = '#/' + path; try { if (location.hash !== t) location.hash = t; } catch (e) {} sync(path); render(); try { window.scrollTo(0, 0); } catch (e) {} }
+window.addEventListener('hashchange', () => { sync(); render(); });
+function chipReq(c){ const r = REQ[c]; return '<span class="chip ' + (r[1] === 'req' ? 'b' : '') + '" title="' + esc(r[0]) + '">' + (r[1] === 'req' ? 'Required' : 'Desirable') + ' ' + c.slice(1) + '</span>'; }
+const dotCol = i => ({ High: '#f2545b', Medium: '#f5c26b', Low: '#7c98b6' }[i]);
+
+/* ---------- the CV activity timeline (contacts) ---------- */
+function activities(){
+  const out = []; Object.values(ROLES).forEach(r => { out.push({ kind: r.type === 'edu' ? 'edu' : 'role', id: r.id, r }); });
+  TICKETS.forEach(t => out.push({ kind: 'ticket', id: t.id, t, r: ROLES[t.role] }));
+  return out;
+}
+function actMatch(a, q){ if (!q) return true; q = q.toLowerCase(); if (a.kind === 'ticket') return (a.t.subject + a.t.desc + a.t.skills.join(' ') + a.t.tools.join(' ')).toLowerCase().includes(q); return (a.r.title + a.r.org + a.r.summary).toLowerCase().includes(q); }
+function actHTML(a){
+  const k = a.kind + ':' + a.id, open = S.open[k] !== undefined ? S.open[k] : S.open.__all === true;
+  if (a.kind === 'ticket'){ const t = a.t; return '<div class="act"><div class="h" data-a="tgl" data-v="' + k + '"><span class="car ' + (open ? 'open' : '') + '">' + ic('caret') + '</span><span class="ic" style="background:#ffe9e3;color:#e8603f">' + ic('ticket') + '</span><span class="tx">Ticket closed: <a data-a="tkopen" data-v="' + t.id + '">' + esc(t.subject) + '</a> by <b>Andrew Latchman</b></span><span class="d">' + esc(t.when) + '</span></div>' +
+    (open ? '<div class="b"><p>' + esc(t.desc) + '</p><p><b>Outcome:</b> ' + esc(t.outcome) + '</p>' + (t.metrics.length ? '<div class="m">' + t.metrics.map(m => '<div><b>' + esc(m[1]) + '</b>' + esc(m[0]) + '</div>').join('') + '</div>' : '') + '<div class="tags">' + t.reqs.map(chipReq).join('') + '<span class="chip o">' + esc(RESP[t.resp].name) + '</span></div></div>' : '') + '</div>'; }
+  const r = a.r; return '<div class="act"><div class="h" data-a="tgl" data-v="' + k + '"><span class="car ' + (open ? 'open' : '') + '">' + ic('caret') + '</span><span class="ic" style="background:#e5f5f8;color:#00748a">' + ic(a.kind === 'edu' ? 'cap' : 'brief') + '</span><span class="tx">' + (a.kind === 'edu' ? 'Education' : 'Role') + ': <b>' + esc(r.title) + '</b> at ' + esc(r.org) + '</span><span class="d">' + esc(r.from + (r.to !== r.from ? ' to ' + r.to : '')) + '</span></div>' + (open ? '<div class="b"><p>' + esc(r.summary) + '</p>' + (TICKETS.filter(t => t.role === r.id).length ? '<p><a data-a="tkrole" data-v="' + r.id + '">' + TICKETS.filter(t => t.role === r.id).length + ' achievement' + (TICKETS.filter(t => t.role === r.id).length === 1 ? '' : 's') + ' from this role</a></p>' : '') + '</div>' : '') + '</div>';
+}
+const TASKS = [['t1', 'Follow up with Andrew', 'Overdue: today'], ['t2', 'Skim the Tickets board: 18 achievements across 6 job responsibilities', 'Due: today'], ['t3', 'Run a test on the "Own the Roadmap" workflow', 'Due: today'], ['t4', 'Book an intro call', 'Due: this week']];
+function tabBody(){
+  const q = S.aq;
+  if (S.tab === 'notes') return '<div class="act"><div class="h"><span class="ic" style="background:#fff4d6;color:#a87a00">' + ic('note') + '</span><span class="tx"><b>Profile</b> by Andrew Latchman</span></div><div class="b"><p>Full-stack Program Manager who moves between strategy and hands-on delivery. Four years of program and project delivery at Zeelo, the last two and a half inside a lean two-person PMO owning delivery across Operations, Product, Commercial, Finance and Data. Uses AI and automation daily and is happiest solving problems nobody has assigned yet.</p></div></div>' +
+    '<div class="act"><div class="h"><span class="ic" style="background:#fff4d6;color:#a87a00">' + ic('note') + '</span><span class="tx"><b>Why this role</b> by Andrew Latchman</span></div><div class="b"><p>The Operations Manager decides what the team works on and makes sure every project delivers real impact. That is the part of the job I have grown into: choosing what gets delivered, in what order, and how, then taking it through to adoption and measuring it.</p><p>Every record in this CRM is tagged to a line in the job description. <a data-a="route" data-v="workflows">See the workflows</a> for how the skills fit together.</p></div></div>' +
+    '<div class="act"><div class="h"><span class="ic" style="background:#fff4d6;color:#a87a00">' + ic('note') + '</span><span class="tx"><b>How to use this CRM</b></span></div><div class="b"><p><b>Contacts</b> is the CV. <b>Tickets</b> are the achievements, as a pipeline. <b>Dashboards</b> are the KPIs and the job-fit scorecard. <b>Workflows</b> show how the skills combine against each responsibility in the job description, and you can test each one.</p></div></div>';
+  if (S.tab === 'emails') return '<div class="act"><div class="h"><span class="ic" style="background:#e5f5f8;color:#00748a">' + ic('mail') + '</span><span class="tx"><b>Draft:</b> Introduction for the hiring manager</span></div><div class="b"><p><b>Subject:</b> Operations Manager at Connectd: Andrew Latchman</p><p>Hi,</p><p>I have put my CV into a small CRM so you can see how it lines up with the Operations Manager role: my achievements as tickets, my KPIs as dashboards, and my skills as workflows against each part of the job description. I would love 20 minutes to talk about owning your operations roadmap.</p><p>Andrew</p><p><button class="btn p sm" data-a="mail" data-v="intro">' + ic('mail') + ' Write to Andrew</button></p></div></div>';
+  if (S.tab === 'calls') return '<div class="act"><div class="h"><span class="tx">No calls logged yet. <a data-a="copy" data-v="' + ME.phone + '">Copy the number ' + ME.phone + '</a> or <a data-a="tab" data-v="meetings">book a meeting</a>.</span></div></div>';
+  if (S.tab === 'meetings') return '<div class="act"><div class="h"><span class="ic" style="background:#e5f5f8;color:#00748a">' + ic('cal') + '</span><span class="tx"><b>Book an intro call</b></span></div><div class="b"><p>Pick a length and a message to Andrew is ready to send.</p><p><button class="btn o sm" data-a="mail" data-v="m20">20 minutes</button> <button class="btn o sm" data-a="mail" data-v="m45">45 minutes</button></p></div></div>';
+  if (S.tab === 'tasks') return upcoming();
+  const list = activities().filter(a => S.af[a.kind] && actMatch(a, q)), byRole = {}; list.forEach(a => { const rid = a.kind === 'ticket' ? a.t.role : a.id; (byRole[rid] = byRole[rid] || []).push(a); });
+  let h = (S.af.task === false ? '' : '<div class="grp" style="margin-top:6px">Upcoming</div>' + upcoming());
+  Object.values(ROLES).forEach(r => { const items = byRole[r.id]; if (!items) return; items.sort((a, b) => (a.kind === 'ticket') - (b.kind === 'ticket')); h += '<div class="grp">' + esc(r.from.toUpperCase() + (r.to !== r.from ? ' TO ' + r.to.toUpperCase() : '')) + '<small>' + esc(r.title + ', ' + r.org) + '</small></div>' + items.map(actHTML).join(''); });
+  if (!list.length) h += '<div class="act"><div class="h">No activity matches your search.</div></div>';
+  return h;
+}
+function upcoming(){ return TASKS.map(t => { const on = !!S.tasks[t[0]]; return '<div class="act task"><div class="h" data-a="task" data-v="' + t[0] + '"><span class="ck ' + (on ? 'on' : '') + '">' + (on ? ic('check') : '') + '</span><span class="tx" style="' + (on ? 'text-decoration:line-through;color:#7c98b6' : '') + '">Task assigned to Hiring manager: <b>' + esc(t[1]) + '</b></span><span class="d ' + (t[2].startsWith('Overdue') && !on ? 'od' : '') + '">' + (on ? 'Done' : t[2]) + '</span></div></div>'; }).join(''); }
+const mailto = (s, b) => 'mailto:' + ME.email + '?subject=' + encodeURIComponent(s) + '&body=' + encodeURIComponent(b || '');
+const FRAMED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+const framed = () => window.__forceFramed === true || FRAMED;
+const MAILS = { intro: ['Operations Manager at Connectd: Andrew Latchman', 'Hi Andrew,\n\nI looked through your CRM and would like to talk about the Operations Manager role.\n\n'], m20: ['Intro call: 20 minutes', 'Hi Andrew,\n\nCould we find 20 minutes for an intro call about the Operations Manager role? Here are some times that work for me:\n\n'], m45: ['Intro call: 45 minutes', 'Hi Andrew,\n\nCould we find 45 minutes to go through the roadmap, the team and your experience in more depth? Times that work for me:\n\n'], feedback: ['Feedback on your CV', 'Hi Andrew,\n\n'] };
+function copyText(text, ok){
+  const done = () => toast(ok || 'Copied'), fallback = () => { try { const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;left:-9999px;top:0'; document.body.appendChild(ta); ta.select(); const okc = document.execCommand('copy'); ta.remove(); okc ? done() : showCopyBox(text); } catch (e) { showCopyBox(text); } };
+  try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback(); } catch (e) { fallback(); }
+}
+function showCopyBox(text){ if (text.length < 90){ toast(text); return; } S.modal = { type: 'copybox', text }; renderLayer(); setTimeout(() => { const t = document.querySelector('#cpb'); if (t){ t.focus(); t.select(); } }, 0); }
+function sendMail(subject, body){
+  if (!framed()){ try { window.location.href = mailto(subject, body); toast('Opening your email app'); return; } catch (e) {} }
+  S.modal = { type: 'mail', subject, body }; renderLayer();   // inside a preview window the browser cannot open an email app, so show the message ready to copy
+}
+function rcard(k, title, count, link, body){ const o = S.rc[k]; return '<div class="rc"><div class="h" data-a="rc" data-v="' + k + '"><span class="car ' + (o ? 'open' : '') + '">' + ic('caret') + '</span>' + title + (count !== null ? ' (' + count + ')' : '') + (link ? '<span class="l">' + link + '</span>' : '') + '</div>' + (o ? '<div class="b">' + body + '</div>' : '') + '</div>'; }
+function vContacts(){
+  const props = [['Email', ME.email], ['Phone number', ME.phone], ['Contact owner', 'Connectd hiring team'], ['Last contacted', 'Today'], ['Lifecycle stage', 'Candidate'], ['Lead status', 'Open to the right role']];
+  const all = [['Job title', ME.title], ['Company name', ME.company], ['City', ME.city], ['Country/Region', ME.country], ['Preferred role', 'Operations Manager'], ['Years in operations', '4'], ['Management experience', 'Ready to step into line management'], ['Education', 'BA Business Studies with Marketing, 2:1'], ['LinkedIn URL', ME.linkedin]];
+  const left = '<aside class="cl"><div class="back"><a data-a="route" data-v="contacts">&lsaquo; Contacts</a><a data-a="menu" data-v="actions" class="rel">Actions ' + ic('down') + '</a></div>' + (S.menu === 'actions' ? '<div class="menu2" style="left:170px;margin-top:-6px"><button data-a="print">Print or save the CV as PDF</button><button data-a="props">Show all properties</button><a href="https://' + ME.linkedin + '" target="_blank" rel="noopener">Open LinkedIn</a></div>' : '') +
+    '<div class="who"><div class="av">' + ME.initials + '</div><div><h1>' + ME.name + '</h1><div class="t">' + ME.title + '</div><div class="t">at ' + ME.company + '</div></div></div>' +
+    '<div class="em">' + ME.email + ' <a data-a="copy" data-v="' + ME.email + '" title="Copy email">' + ic('copy') + '</a></div>' +
+    '<div class="acts"><button title="Note" data-a="tab" data-v="notes">' + ic('note') + '</button><button title="Email" data-a="tab" data-v="emails">' + ic('mail') + '</button><button title="Call" data-a="tab" data-v="calls">' + ic('phone') + '</button><button title="Task" data-a="tab" data-v="tasks">' + ic('task') + '</button><button title="Meeting" data-a="tab" data-v="meetings">' + ic('cal') + '</button><button title="More" data-a="menu" data-v="actions">' + ic('more') + '</button></div>' +
+    '<h4><span class="car open">' + ic('caret') + '</span> About this contact</h4>' + (S.props ? props.concat(all) : props).map(p => '<div class="prop"><b>' + p[0] + '</b><span>' + esc(p[1]) + '</span></div>').join('') +
+    '<div class="bt"><button class="btn sm" data-a="props">' + (S.props ? 'Show fewer properties' : 'View all properties') + '</button><button class="btn sm" data-a="hist">View property history</button></div>' +
+    '<h4><span class="car open">' + ic('caret') + '</span> Availability</h4><p style="font-size:13px;margin:0 0 12px">Open to Operations Manager roles. Based in London, with experience supporting UK and US teams.</p>' +
+    '<h4><span class="car open">' + ic('caret') + '</span> Online presence</h4><p style="font-size:13px;margin:0 0 12px">LinkedIn shows the full career history. <a href="https://' + ME.linkedin + '" target="_blank" rel="noopener">View profile</a></p></aside>';
+  const tabs = [['activity', 'Activity'], ['notes', 'Notes'], ['emails', 'Emails'], ['calls', 'Calls'], ['tasks', 'Tasks'], ['meetings', 'Meetings']];
+  const nF = Object.values(S.af).filter(Boolean).length;
+  const mid = '<section class="cm"><div class="bar"><div class="srch">' + ic('search') + '<input class="inp" id="aq" placeholder="Search activities" value="' + esc(S.aq) + '"></div><span style="flex:1"></span><button class="btn sm" data-a="expand" data-v="1">Expand all</button><button class="btn sm" data-a="expand" data-v="0">Collapse all</button></div>' +
+    '<div class="tabs">' + tabs.map(t => '<button class="' + (S.tab === t[0] ? 'on' : '') + '" data-a="tab" data-v="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>' +
+    (S.tab === 'activity' ? '<div class="flt">Filter by: <a data-a="menu" data-v="flt" class="rel">Filter activity (' + nF + '/3) ' + ic('down') + '</a> <a>All users ' + ic('down') + '</a>' + (S.menu === 'flt' ? '<div class="menu2" style="left:80px">' + [['role', 'Roles'], ['ticket', 'Tickets (achievements)'], ['edu', 'Education']].map(f => '<button data-a="af" data-v="' + f[0] + '">' + (S.af[f[0]] ? '&#10003; ' : '&nbsp;&nbsp;&nbsp;') + f[1] + '</button>').join('') + '</div>' : '') + '</div>' : '') + tabBody() + '</section>';
+  const reqs = Object.keys(REQ), lists = SKILL_LISTS.map(l => '<div><a data-a="tkTool" data-v="' + l[1][0] + '">' + l[0] + '</a><span class="chip">' + l[1].length + ' tools</span></div>').join('');
+  const right = '<aside class="cr">' + rcard('companies', 'Companies', COMPANIES.length, '<a data-a="toast" data-v="Read-only: email Andrew to add context">+ Add</a>', COMPANIES.map(c => '<div><a data-a="tkCo" data-v="' + esc(c[0]) + '">' + esc(c[0]) + '</a><span class="muted" style="color:var(--sub)">' + esc(c[1]) + '</span></div>').join('')) +
+    rcard('deals', 'Deals', 1, '<a data-a="toast" data-v="Read-only: email Andrew to add context">+ Add</a>', '<div><b>Operations Manager, Connectd</b></div><div><span class="chip o">Stage: Application</span><span class="chip">Owner: Hiring manager</span></div>') +
+    rcard('tickets', 'Tickets', TICKETS.length, '<a data-a="route" data-v="tickets">View all</a>', TICKETS.slice(0, 6).map(t => '<div><a data-a="tkopen" data-v="' + t.id + '">' + esc(t.subject) + '</a></div>').join('') + '<div><a data-a="route" data-v="tickets">See all ' + TICKETS.length + ' on the board</a></div>') +
+    rcard('attach', 'Attachments', 1, '<a data-a="print">Add</a>', '<div>' + ic('note') + ' <a data-a="print">Andrew_Latchman_CV.pdf</a></div><div style="color:var(--sub)">Generated from this record. Opens the print dialog so you can save it as a PDF.</div>') +
+    rcard('source', 'Contact create attribution', null, '', '<div>Original source: <b>Direct application</b></div><div>First conversion: <b>Operations Manager, Connectd</b></div>') +
+    rcard('feedback', 'Past Feedback', 0, '', '<div style="color:var(--sub)">No feedback yet. <a data-a="mail" data-v="feedback">Tell Andrew what you think</a>.</div>') +
+    rcard('lists', 'List memberships', SKILL_LISTS.length, '<a data-a="route" data-v="dashboards/skills">Manage</a>', lists) +
+    rcard('play', 'Playbooks', reqs.length, '<a data-a="route" data-v="dashboards/jd">Open</a>', reqs.map(c => '<div><a data-a="tkReq" data-v="' + c + '">' + (REQ[c][1] === 'req' ? 'Required ' : 'Desirable ') + c.slice(1) + '</a><span style="color:var(--sub)">' + esc(REQ[c][0].length > 44 ? REQ[c][0].slice(0, 42) + '...' : REQ[c][0]) + '</span></div>').join('')) +
+    rcard('wf', 'Workflow memberships', Object.keys(WF).length, '<a data-a="route" data-v="workflows">Manage</a>', Object.keys(WF).map(k => '<div><a data-a="route" data-v="workflows/' + k + '">' + esc(WF[k].name) + '</a><span class="chip g">Active</span></div>').join('')) + '</aside>';
+  return '<div class="rec">' + left + mid + right + '</div>';
+}
+
+/* ---------- tickets ---------- */
+function ftickets(){
+  const f = S.tf, ai = ['Claude', 'ChatGPT', 'Synthesia', 'AI chatbot', 'n8n', 'Zapier'];
+  return TICKETS.filter(t => (!f.q || (t.subject + ' ' + t.id + ' ' + t.desc + ' ' + t.skills.join(' ') + ' ' + t.tools.join(' ') + ' ' + RESP[t.resp].name).toLowerCase().includes(f.q.toLowerCase())) && (!f.req || t.reqs.includes(f.req)) && (!f.company || t.company === f.company) && (!f.tool || t.tools.includes(f.tool)) && (!f.impact || t.impact === f.impact) && (!f.role || t.role === f.role) &&
+    (f.view === 'all' || (f.view === 'measured' && t.stage === 'measured') || (f.view === 'high' && t.impact === 'High') || (f.view === 'ai' && (t.resp === 'ai' || t.tools.some(x => ai.includes(x))))));
+}
+function mineList(){ const q = S.tf.q.toLowerCase(); return S.mine.filter(t => !q || (t.subject + ' ' + t.desc).toLowerCase().includes(q)); }
+function tmine(t){ return '<div class="tk' + (S.flash === t.id ? ' fresh' : '') + '" data-a="mineopen" data-v="' + t.id + '" tabindex="0"><div class="flag">Your question for Andrew</div><a class="tt">' + esc(t.subject) + '</a><div class="r">Created: <b>Today</b></div><div class="r">Ticket owner: <b>' + esc(ME.name) + '</b></div><div class="pr"><span class="dot" style="background:' + dotCol(t.impact) + '"></span>' + t.impact + ' priority</div></div>'; }
+function tcard(t){ return '<div class="tk" data-a="tkopen" data-v="' + t.id + '" tabindex="0">' + (t.metrics.length ? '<div class="flag">Key result: ' + esc(t.metrics[0][1] + ' ' + t.metrics[0][0].toLowerCase()) + '</div>' : '') + '<a class="tt">' + esc(t.subject) + '</a><div class="r">' + (t.when.includes('to') ? 'Ran: ' : 'Closed: ') + '<b>' + esc(t.when) + '</b></div><div class="r">Ticket owner: <b>' + esc(t.owner) + '</b></div><div class="r">' + esc(t.company) + ' · ' + esc(ROLES[t.role].short) + '</div><div class="pr"><span class="dot" style="background:' + dotCol(t.impact) + '"></span>' + t.impact + ' impact</div></div>'; }
+function vTickets(){
+  const f = S.tf, list = ftickets(), mine = mineList(), cols = f.pipeline === 'delivery' ? STAGES.map(s => ({ k: s[0], name: s[1], items: list.filter(t => t.stage === s[0]) })) : Object.keys(RESP).map(k => ({ k, name: RESP[k].name.toUpperCase(), items: list.filter(t => t.resp === k) }));
+  cols.unshift({ k: 'new', name: 'NEW TICKET', items: mine, isNew: true });
+  const companies = [...new Set(TICKETS.map(t => t.company))], tools = [...new Set(TICKETS.flatMap(t => t.tools))].sort(), nf = ['req', 'company', 'tool', 'impact', 'role'].filter(k => f[k]).length;
+  const views = [['all', 'All tickets'], ['measured', 'Measured results'], ['high', 'High impact'], ['ai', 'AI and automation']];
+  let h = '<div class="pg"><div class="ttl"><h1>Tickets</h1><div class="vt"><button class="' + (f.mode === 'list' ? 'on' : '') + '" data-a="mode" data-v="list" title="List view">' + ic('list') + '</button><button class="' + (f.mode === 'board' ? 'on' : '') + '" data-a="mode" data-v="board" title="Board view">' + ic('board') + '</button></div>' +
+    '<select class="sel" id="pipe" aria-label="Pipeline"><option value="delivery" ' + (f.pipeline === 'delivery' ? 'selected' : '') + '>Delivery pipeline</option><option value="jd" ' + (f.pipeline === 'jd' ? 'selected' : '') + '>Job description pipeline</option></select>' +
+    '<select class="sel" id="vw" aria-label="View">' + views.map(v => '<option value="' + v[0] + '" ' + (f.view === v[0] ? 'selected' : '') + '>' + v[1] + '</option>').join('') + '</select><span class="sp"></span>' +
+    '<span class="rel"><button class="btn o" data-a="menu" data-v="tact">Actions ' + ic('down') + '</button>' + (S.menu === 'tact' ? '<div class="menu2" style="right:0;top:36px"><button data-a="copyTickets">Copy the ticket list</button><button data-a="print">Print the CV</button>' + (S.mine.length ? '<button data-a="clearMine">Delete my ' + S.mine.length + ' ticket' + (S.mine.length === 1 ? '' : 's') + '</button>' : '') + '</div>' : '') + '</span><button class="btn o" data-a="import">Import</button><button class="btn p" data-a="create">Create ticket</button></div>' +
+    '<div class="fl"><div class="srch">' + ic('search') + '<input class="inp" id="tq" placeholder="Search ID, name or subject" value="' + esc(f.q) + '"></div><button class="btn g" data-a="fp">' + ic('list') + ' More filters' + (nf ? ' (' + nf + ')' : '') + '</button><a data-a="clear">Clear All</a><span style="flex:1"></span><span class="rel"><button class="btn g" data-a="menu" data-v="bact">Board actions ' + ic('down') + '</button>' + (S.menu === 'bact' ? '<div class="menu2" style="right:0;top:36px"><button data-a="colAll" data-v="1">Collapse all columns</button><button data-a="colAll" data-v="0">Expand all columns</button></div>' : '') + '</span><button class="btn g" data-a="saveView">' + ic('board') + ' ' + (S.saved ? 'Update view' : 'Save view') + '</button></div>';
+  if (S.fp) h += '<div class="fp"><div><label>Job requirement</label><select class="sel" data-f="req"><option value="">Any</option>' + Object.keys(REQ).map(c => '<option value="' + c + '" ' + (f.req === c ? 'selected' : '') + '>' + (REQ[c][1] === 'req' ? 'Required ' : 'Desirable ') + c.slice(1) + ': ' + esc(REQ[c][0].slice(0, 34)) + '</option>').join('') + '</select></div>' +
+    '<div><label>Company</label><select class="sel" data-f="company"><option value="">Any</option>' + companies.map(c => '<option ' + (f.company === c ? 'selected' : '') + '>' + esc(c) + '</option>').join('') + '</select></div><div><label>Tool</label><select class="sel" data-f="tool"><option value="">Any</option>' + tools.map(c => '<option ' + (f.tool === c ? 'selected' : '') + '>' + esc(c) + '</option>').join('') + '</select></div>' +
+    '<div><label>Impact</label><select class="sel" data-f="impact"><option value="">Any</option>' + ['High', 'Medium', 'Low'].map(c => '<option ' + (f.impact === c ? 'selected' : '') + '>' + c + '</option>').join('') + '</select></div><div><label>Role</label><select class="sel" data-f="role"><option value="">Any</option>' + Object.values(ROLES).filter(r => TICKETS.some(t => t.role === r.id)).map(r => '<option value="' + r.id + '" ' + (f.role === r.id ? 'selected' : '') + '>' + esc(r.title) + '</option>').join('') + '</select></div></div>';
+  if (f.mode === 'list'){
+    h += '<table class="tbl"><thead><tr><th>Ticket name</th><th>Ticket status</th><th>Priority</th><th>Company</th><th>Closed</th><th>Job area</th></tr></thead><tbody>' + mine.map(t => '<tr data-a="mineopen" data-v="' + t.id + '"><td><a>' + esc(t.subject) + '</a><div style="font-size:12px;color:var(--sub)">' + t.id + '</div></td><td><span class="chip o">NEW TICKET</span></td><td><span class="dot" style="background:' + dotCol(t.impact) + '"></span> ' + t.impact + '</td><td>Your question</td><td>Today</td><td>For Andrew</td></tr>').join('') + list.map(t => '<tr data-a="tkopen" data-v="' + t.id + '"><td><a>' + esc(t.subject) + '</a><div style="font-size:12px;color:var(--sub)">' + t.id + '</div></td><td><span class="chip ' + (t.stage === 'measured' ? 'g' : (t.stage === 'adopted' ? 'b' : '')) + '">' + esc(STAGES.find(s => s[0] === t.stage)[1]) + '</span></td><td><span class="dot" style="background:' + dotCol(t.impact) + '"></span> ' + t.impact + '</td><td>' + esc(t.company) + '</td><td>' + esc(t.when) + '</td><td>' + esc(RESP[t.resp].short) + '</td></tr>').join('') + '</tbody></table>' + (list.length ? '' : '<p style="padding:20px">No tickets match these filters.</p>');
+  } else {
+    h += '<div class="board">' + cols.map(c => { const col = S.collapsed[c.k]; return '<div class="bc ' + (col ? 'cl2' : '') + '"><div class="hd" data-a="colTgl" data-v="' + c.k + '" style="cursor:pointer">' + (col ? '<span title="' + esc(c.name) + '">' + c.items.length + '</span>' : esc(c.name) + '<span class="n">' + ic('flow') + ' ' + c.items.length + '</span>') + '</div>' + (col ? '' : '<div class="bd">' + (c.isNew ? (c.items.length ? c.items.map(tmine).join('') : '<div style="padding:14px 10px;font-size:13px;color:var(--sub);line-height:1.5">Nothing here yet. Ask Andrew something with <a data-a="create">Create ticket</a>, or paste a few questions with <a data-a="import">Import</a>.</div>') : c.items.map(tcard).join('')) + '</div>') + '</div>'; }).join('') + '</div>';
+  }
+  return h + '</div>';
+}
+function drawerTk(id){
+  const t = tk(id), list = ftickets(), i = list.indexOf(t), stage = STAGES.find(s => s[0] === t.stage), wfs = Object.keys(WF).filter(k => WF[k].nodes.some(n => (n.ev || []).includes(id)));
+  return '<div class="dh"><small>' + t.id + (i >= 0 ? ' · ' + (i + 1) + ' of ' + list.length : '') + '</small><h2>' + esc(t.subject) + '</h2><button class="dx" data-a="closeDrawer" aria-label="Close">&times;</button><div class="dnav"><button data-a="tknav" data-v="-1">&lsaquo; Previous</button><button data-a="tknav" data-v="1">Next &rsaquo;</button></div></div><div class="db"><h5>About this ticket</h5><div class="pp"><div><b>Ticket status</b><span class="chip ' + (t.stage === 'measured' ? 'g' : (t.stage === 'adopted' ? 'b' : '')) + '">' + stage[1] + '</span> <span style="color:var(--sub);font-size:12px">' + stage[2] + '</span></div><div><b>Priority</b><span class="dot" style="background:' + dotCol(t.impact) + '"></span> ' + t.impact + ' impact</div><div><b>Ticket owner</b>' + esc(t.owner) + '</div><div><b>Company</b>' + esc(t.company) + '</div><div><b>Role at the time</b>' + esc(ROLES[t.role].title) + '</div><div><b>' + (t.when.includes('to') ? 'Ran' : 'Closed') + '</b>' + esc(t.when) + '</div><div><b>Job area</b><a data-a="route" data-v="workflows/' + t.resp + '">' + esc(RESP[t.resp].name) + '</a></div><div><b>Pipeline</b>Delivery pipeline</div></div>' +
+    '<h5>Description</h5><p style="margin:0">' + esc(t.desc) + '</p><h5>Outcome</h5><p style="margin:0">' + esc(t.outcome) + '</p>' + (t.metrics.length ? '<h5>Key results</h5><div class="km">' + t.metrics.map(m => '<div><b>' + esc(m[1]) + '</b><span>' + esc(m[0]) + '</span></div>').join('') + '</div>' : '') +
+    (t.skills.length ? '<h5>Skills used</h5><div class="tags">' + t.skills.map(s => '<span class="chip">' + esc(s) + '</span>').join('') + '</div>' : '') + (t.tools.length ? '<h5>Tools</h5><div class="tags">' + t.tools.map(s => '<a data-a="tkTool" data-v="' + esc(s) + '" class="chip">' + esc(s) + '</a>').join('') + '</div>' : '') +
+    '<h5>Fit with the job description</h5><div style="display:grid;gap:6px">' + t.reqs.map(c => '<div>' + chipReq(c) + ' <span style="font-size:13px">' + esc(REQ[c][0]) + '</span></div>').join('') + '</div>' +
+    '<h5>' + esc(RESP[t.resp].name) + '</h5><p style="margin:0;font-size:13px;color:var(--sub)">' + esc(RESP[t.resp].jd) + '</p>' + (wfs.length ? '<h5>Used as evidence in these workflows</h5><div class="tags">' + wfs.map(k => '<a class="chip o" data-a="route" data-v="workflows/' + k + '">' + esc(WF[k].name) + '</a>').join('') + '</div>' : '') + '</div>';
+}
+function drawerMine(id){
+  const t = S.mine.find(x => x.id === id); if (!t) return '';
+  return '<div class="dh"><small>' + t.id + ' · New ticket</small><h2>' + esc(t.subject) + '</h2><button class="dx" data-a="closeDrawer" aria-label="Close">&times;</button></div><div class="db"><h5>About this ticket</h5><div class="pp"><div><b>Ticket status</b><span class="chip o">NEW TICKET</span></div><div><b>Priority</b><span class="dot" style="background:' + dotCol(t.impact) + '"></span> ' + t.impact + '</div><div><b>Ticket owner</b>' + esc(ME.name) + '</div><div><b>Created</b>Today</div></div>' + (t.desc ? '<h5>Description</h5><p style="margin:0;white-space:pre-wrap">' + esc(t.desc) + '</p>' : '') +
+    '<h5>What next</h5><p style="margin:0 0 12px;font-size:13.5px;color:var(--sub)">This ticket is saved in your browser. Email it to Andrew when you are ready, or delete it.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn p" data-a="mailMine" data-v="' + t.id + '">' + ic('mail') + ' Email this to Andrew</button><button class="btn" data-a="delMine" data-v="' + t.id + '">Delete ticket</button></div></div>';
+}
+function modalCreate(){ const m = S.modal; return '<div class="modal" data-a="closeModal"><div class="dlg" data-stop><div class="mh">Create ticket<button class="dx" data-a="closeModal" aria-label="Close">&times;</button></div><div class="mb"><p style="margin:0;color:var(--sub);font-size:13px">Ask Andrew a question. It appears straight away in the New ticket column.</p><label>Ticket name</label><input id="cn" placeholder="For example: Tell me about the CRM migration" value="' + esc(m.name) + '">' + (m.err ? '<div style="color:#f2545b;font-size:12.5px;margin-top:4px">Give the ticket a name.</div>' : '') + '<label>Description (optional)</label><textarea id="cb" placeholder="Anything that helps Andrew answer well">' + esc(m.body) + '</textarea><label>Priority</label><select class="sel" id="cp">' + ['Low', 'Medium', 'High'].map(p => '<option ' + (m.pr === p ? 'selected' : '') + '>' + p + '</option>').join('') + '</select></div><div class="mf"><button class="btn p" data-a="createSave">Create</button><button class="btn" data-a="closeModal">Cancel</button></div></div></div>'; }
+function modalImport(){ const m = S.modal, n = m.text.split('\n').filter(x => x.trim()).length; return '<div class="modal" data-a="closeModal"><div class="dlg" data-stop><div class="mh">Import tickets<button class="dx" data-a="closeModal" aria-label="Close">&times;</button></div><div class="mb"><p style="margin:0;color:var(--sub);font-size:13px">Paste your questions for Andrew, one per line. Each line becomes a ticket in the New ticket column.</p><label>Your list</label><textarea id="ib" style="min-height:150px" placeholder="How did you decide what to build first?\nWhat would you do in your first 30 days?\nTell me about a time you said no to a project">' + esc(m.text) + '</textarea>' + (m.err ? '<div style="color:#f2545b;font-size:12.5px;margin-top:4px">Add at least one line to import.</div>' : '') + '<label>Or choose a text or CSV file</label><input type="file" id="if" accept=".txt,.csv,text/plain,text/csv"></div><div class="mf"><button class="btn p" data-a="importSave">Import' + (n ? ' ' + n + ' ticket' + (n === 1 ? '' : 's') : '') + '</button><button class="btn" data-a="closeModal">Cancel</button></div></div></div>'; }
+
+/* ---------- dashboards ---------- */
+const PAL = ['#ec6b4b', '#5bbcb6', '#8b85dd', '#f6cd7f', '#7fb3d5', '#b0c1d4'];
+function barSvg(items, w, h){
+  const max = Math.max(...items.map(i => i.v), 1), top = Math.ceil(max / 2) * 2 || 2, pl = 34, pb = 38, pt = 12, bw = (w - pl - 10) / items.length, ph = h - pb - pt;
+  let s = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" role="img" aria-label="Bar chart">';
+  for (let g = 0; g <= 4; g++){ const y = pt + ph - ph * g / 4; s += '<line x1="' + pl + '" x2="' + (w - 6) + '" y1="' + y + '" y2="' + y + '" stroke="#cbd6e2" stroke-width="1"/><text x="' + (pl - 8) + '" y="' + (y + 4) + '" text-anchor="end" font-size="10" fill="#7c98b6">' + (top * g / 4) + '</text>'; }
+  items.forEach((it, i) => { const bh = ph * it.v / top, x = pl + i * bw + bw * 0.22, y = pt + ph - bh; s += '<rect class="sg" x="' + x + '" y="' + y + '" width="' + bw * 0.56 + '" height="' + bh + '" fill="#ec6b4b" data-tip="' + esc(it.tip) + '" data-a="barGo" data-v="' + it.go + '"/><text x="' + (x + bw * 0.28) + '" y="' + (h - 18) + '" text-anchor="middle" font-size="10" fill="#516f90">' + esc(it.k) + '</text>'; });
+  return s + '</svg>';
+}
+function pieSvg(items, r){
+  const tot = items.reduce((s, i) => s + i.v, 0) || 1; let a0 = -Math.PI / 2, s = '<svg viewBox="0 0 ' + r * 2 + ' ' + r * 2 + '" width="' + r * 2 + '" height="' + r * 2 + '" role="img" aria-label="Pie chart">';
+  items.forEach(it => { if (!it.v) return; const a1 = a0 + it.v / tot * Math.PI * 2, large = a1 - a0 > Math.PI ? 1 : 0, x0 = r + r * Math.cos(a0), y0 = r + r * Math.sin(a0), x1 = r + r * Math.cos(a1), y1 = r + r * Math.sin(a1); s += it.v === tot ? '<circle class="sg" cx="' + r + '" cy="' + r + '" r="' + r + '" fill="' + it.c + '" data-tip="' + esc(it.tip) + '"/>' : '<path class="sg" d="M' + r + ' ' + r + ' L' + x0 + ' ' + y0 + ' A' + r + ' ' + r + ' 0 ' + large + ' 1 ' + x1 + ' ' + y1 + ' Z" fill="' + it.c + '" stroke="#fff" stroke-width="1.5" data-tip="' + esc(it.tip) + '" data-a="pieGo" data-v="' + it.go + '"/>'; a0 = a1; });
+  return s + '</svg>';
+}
+function kpi(label, value, sub, go, up){ return '<div class="dc kpi ' + (go ? 'click' : '') + '" ' + (go ? 'data-a="tkopen" data-v="' + go + '" tabindex="0"' : '') + '><div class="lb">' + label + '</div><div class="nm">' + value + '</div><div class="dl">' + (up ? '<i></i>' : '') + sub + '</div></div>'; }
+function dTickets(){ return TICKETS.filter(t => !S.dco || t.company === S.dco); }
+function vDash(){
+  const ts = dTickets(), dsh = S.dsh, names = { impact: 'Impact summary', jd: 'Job fit scorecard', skills: 'Skills and tools' }, companies = [...new Set(TICKETS.map(t => t.company))];
+  let h = '<div class="pg"><div class="ttl"><h1>' + names[dsh] + '</h1><select class="sel" id="dsel" aria-label="Dashboard">' + Object.keys(names).map(k => '<option value="' + k + '" ' + (k === dsh ? 'selected' : '') + '>' + names[k] + '</option>').join('') + '</select><span class="sp"></span><button class="btn o" data-a="toast" data-v="Reports are built live from the Tickets data">Add report</button><button class="btn o" data-a="menu" data-v="dact">Actions ' + ic('down') + '</button>' + (S.menu === 'dact' ? '<div class="menu2" style="right:28px;top:100px"><button data-a="print">Print the CV</button></div>' : '') + '</div>' +
+    '<div class="fl"><span style="font-size:13px;color:var(--sub)">Company</span><select class="sel" id="dco"><option value="">All companies</option>' + companies.map(c => '<option ' + (S.dco === c ? 'selected' : '') + '>' + esc(c) + '</option>').join('') + '</select><span style="font-size:13px;color:var(--sub)">Date range</span><select class="sel"><option>All time, 2015 to today</option></select><span style="flex:1"></span><span class="chip">' + ts.length + ' of ' + TICKETS.length + ' tickets</span></div>';
+  if (dsh === 'impact'){
+    const roleOrder = ['bliss', 'opsspec', 'globalops', 'prodops', 'pm'], bars = roleOrder.map(r => ({ k: ROLES[r].short, v: ts.filter(t => t.role === r).length, tip: ROLES[r].title + ': ' + ts.filter(t => t.role === r).length + ' achievements', go: r })), pie = Object.keys(RESP).map((k, i) => ({ v: ts.filter(t => t.resp === k).length, c: RESP[k].color, tip: RESP[k].name + ': ' + ts.filter(t => t.resp === k).length, go: k, name: RESP[k].name }));
+    const has = id => ts.some(t => t.id === id), v = (id, x) => has(id) ? x : '&ndash;';
+    h += '<div class="dash"><div class="dc" style="grid-row:span 2"><h3>Achievements delivered by role</h3>' + barSvg(bars, 420, 300) + '<div style="font-size:12px;color:var(--sub);margin-top:6px">Click a bar to see the tickets.</div></div>' +
+      kpi('Drivers in the new CRM', v('TCK-1001', '1,500+'), 'Big Bang migration', has('TCK-1001') ? 'TCK-1001' : '') + kpi('Daily users', v('TCK-1001', '30+'), 'Operations and Service Delivery', has('TCK-1001') ? 'TCK-1001' : '') +
+      '<div class="dc" style="grid-row:span 2"><h3>Achievements by job responsibility</h3><div style="display:flex;justify-content:center">' + pieSvg(pie, 118) + '</div><div class="leg">' + pie.map(p => '<div data-a="pieGo" data-v="' + p.go + '"><i style="background:' + p.c + '"></i>' + esc(p.name) + ' (' + p.v + ')</div>').join('') + '</div></div>' +
+      kpi('Users migrated', v('TCK-1001', '50+'), 'Monday.com to HubSpot', has('TCK-1001') ? 'TCK-1001' : '') + kpi('Sentiment swing', v('TCK-1003', '36%'), 'After the AI chatbot', has('TCK-1003') ? 'TCK-1003' : '', has('TCK-1003')) +
+      '</div>' +
+      '<div class="dash" style="margin-top:14px;grid-template-columns:1fr 1fr 1fr"><div class="dc"><h3>Delivery pipeline</h3><div class="fun">' + STAGES.map(s => '<div><b>' + ts.filter(t => t.stage === s[0]).length + '</b>' + s[1].charAt(0) + s[1].slice(1).toLowerCase() + '</div>').join('') + '</div><p style="font-size:12.5px;color:var(--sub);margin:10px 0 0">Delivered is shipped, adopted is in daily use, measured has a number on it.</p></div>' + toolsCard(ts) + '<div class="dc"><h3>Teams and markets supported</h3><div class="tags" style="margin-bottom:12px">' + ['Operations', 'Product', 'Commercial', 'Finance', 'Data'].map(x => '<span class="chip g">' + x + '</span>').join('') + '</div><div class="tags">' + ['United Kingdom', 'United States'].map(x => '<span class="chip b">' + x + '</span>').join('') + '</div><p style="font-size:12.5px;color:var(--sub);margin:12px 0 0">Five teams across two markets, including three weeks on the ground in the US.</p></div></div>';
+  } else if (dsh === 'jd'){
+    const keys = Object.keys(WF);
+    h += '<div class="dash" style="grid-template-columns:repeat(3,1fr)">' + keys.map(k => { const acts = WF[k].nodes.filter(n => n.type === 'action'), c = x => acts.filter(n => n.strength === x).length, p = k => acts.length ? Math.round(c(k) / acts.length * 100) : 0; return '<div class="dc click kpi" style="text-align:left;cursor:pointer" data-a="route" data-v="workflows/' + k + '"><h3>' + esc(WF[k].name) + '</h3><div style="display:flex;height:12px;border-radius:2px;overflow:hidden;background:var(--soft)"><i style="width:' + p('strong') + '%;background:#00bda5"></i><i style="width:' + p('partial') + '%;background:#f5c26b"></i><i style="width:' + p('ready') + '%;background:#7c98b6"></i></div><div style="font-size:12.5px;margin-top:10px;color:var(--text)">' + c('strong') + ' strong · ' + c('partial') + ' partial · ' + c('ready') + ' readiness</div><div style="font-size:12px;color:var(--sub);margin-top:4px">' + acts.length + ' skills in this workflow, ' + ts.filter(t => t.resp === k).length + ' tickets. Open the workflow.</div></div>'; }).join('') + '</div>' +
+      '<div class="dc" style="margin-top:14px"><h3>Job description requirements and the evidence for each</h3><table class="tbl" style="border:0"><thead><tr><th>Requirement</th><th>Evidence</th><th>Tickets</th></tr></thead><tbody>' + Object.keys(REQ).map(c => { const n = ts.filter(t => t.reqs.includes(c)).length; return '<tr data-a="tkReq" data-v="' + c + '"><td>' + chipReq(c) + ' ' + esc(REQ[c][0]) + '</td><td>' + (c === 'R5' ? '<span class="chip b">Ready to step up</span>' : (n ? '<span class="chip g">Evidenced</span>' : '<span class="chip">None here</span>')) + '</td><td>' + n + '</td></tr>'; }).join('') + '</tbody></table></div>' +
+      '<div class="dc" style="margin-top:14px"><h3>Honest gaps</h3><p style="margin:0;font-size:13.5px"><b>Formal line management:</b> not yet held as a title. The evidence is a leadership cohort, C-suite mentorship and coaching colleagues on tools. <b>Saying no, or not yet:</b> shown through proofs of concept ahead of formal builds, with less direct evidence than the rest.</p></div>';
+  } else {
+    const skills = {}; ts.forEach(t => t.skills.forEach(s => { skills[s] = (skills[s] || 0) + 1; })); const top = Object.entries(skills).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 10), mx = top.length ? top[0][1] : 1;
+    h += '<div class="dash" style="grid-template-columns:1fr 1fr"><div class="dc"><h3>Most used skills across achievements</h3>' + top.map(s => '<div class="hb"><span class="l" style="width:190px">' + esc(s[0]) + '</span><span class="t"><i style="width:' + s[1] / mx * 100 + '%;background:#8b85dd"></i></span><span class="v">' + s[1] + '</span></div>').join('') + '</div>' + toolsCard(ts) + '</div>' +
+      '<div class="dash" style="margin-top:14px;grid-template-columns:repeat(4,1fr)">' + SKILL_LISTS.map((l, i) => '<div class="dc"><h3>' + l[0] + '</h3>' + l[1].map(x => '<div style="padding:4px 0;font-size:13px"><a data-a="tkTool" data-v="' + x + '">' + x + '</a> <span style="color:var(--sub)">' + ts.filter(t => t.tools.includes(x)).length + '</span></div>').join('') + '</div>').join('') + '</div>';
+  }
+  return h + '</div>';
+}
+function toolsCard(ts){ const c = {}; ts.forEach(t => t.tools.forEach(x => { c[x] = (c[x] || 0) + 1; })); const top = Object.entries(c).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 7), mx = top.length ? top[0][1] : 1; return '<div class="dc"><h3>Tools used across achievements</h3>' + (top.length ? top.map(s => '<div class="hb" data-a="tkTool" data-v="' + esc(s[0]) + '" style="cursor:pointer"><span class="l">' + esc(s[0]) + '</span><span class="t"><i style="width:' + s[1] / mx * 100 + '%"></i></span><span class="v">' + s[1] + '</span></div>').join('') : '<p style="color:var(--sub)">No tools in this selection.</p>') + '</div>'; }
+
+/* ---------- workflows ---------- */
+const COLW = 290, GAP = 58, PADX = 36, PADY = 36, NW = { trigger: 250, branch: 250, action: 250, label: 170, end: 84 }, NH = { trigger: 124, branch: 80, action: 148, label: 38, end: 34 };
+function rowYs(w){ const rows = {}; w.nodes.forEach(n => { rows[n.row] = Math.max(rows[n.row] || 0, NH[n.type]); }); const ys = {}; let y = PADY; Object.keys(rows).map(Number).sort((a, b) => a - b).forEach(r => { ys[r] = y; y += rows[r] + GAP; }); return ys; }
+function npos(n, ys){ const w = NW[n.type]; return { x: PADX + n.col * COLW + (250 - w) / 2, y: ys[n.row], w, h: NH[n.type] }; }
+function wfStats(w){ const a = w.nodes.filter(n => n.type === 'action'); return { n: a.length, strong: a.filter(x => x.strength === 'strong').length, partial: a.filter(x => x.strength === 'partial').length, ready: a.filter(x => x.strength === 'ready').length, tickets: [...new Set(a.flatMap(x => x.ev))] }; }
+function vWfList(){
+  return '<div class="pg"><div class="ttl"><h1>Workflows</h1><span class="sp"></span><button class="btn o" data-a="toast" data-v="These workflows are built from the CV: nothing to import">Import</button><button class="btn p" data-a="toast" data-v="Six workflows, one per job responsibility">Create workflow</button></div><p style="margin:0 0 16px;color:var(--sub);max-width:760px">Each workflow is one responsibility from the job description. The steps are Andrew\'s skills, in the order they combine, with evidence behind each step. Open one and run a test.</p>' +
+    '<table class="tbl"><thead><tr><th>Name</th><th>Status</th><th>Skills in flow</th><th>Evidence</th><th>Enrolled tickets</th><th>Last updated</th></tr></thead><tbody>' + Object.keys(WF).map(k => { const w = WF[k], s = wfStats(w); return '<tr data-a="route" data-v="workflows/' + k + '"><td><a>' + esc(w.name) + '</a><div style="font-size:12px;color:var(--sub);max-width:420px">' + esc(w.desc) + '</div></td><td><span class="sw"></span> On</td><td>' + s.n + '</td><td><span class="chip g">' + s.strong + ' strong</span> <span class="chip a">' + s.partial + ' partial</span>' + (s.ready ? ' <span class="chip b">' + s.ready + ' readiness</span>' : '') + '</td><td>' + s.tickets.length + '</td><td>Today</td></tr>'; }).join('') + '</tbody></table></div>';
+}
+function wfCanvas(w){
+  const nums = {}; let c = 0; w.nodes.slice().sort((a, b) => a.row - b.row || a.col - b.col).forEach(n => { if (n.type === 'action' || n.type === 'branch') nums[n.id] = ++c; });
+  const ys = rowYs(w), P = {}; w.nodes.forEach(n => { P[n.id] = npos(n, ys); }); const W = Math.max(...w.nodes.map(n => P[n.id].x + P[n.id].w)) + PADX, H = Math.max(...w.nodes.map(n => P[n.id].y + P[n.id].h)) + PADY + 20;
+  const run = S.wfRun; let paths = '', plus = '';
+  w.edges.forEach(e => { const a = P[e[0]], b = P[e[1]], x1 = a.x + a.w / 2, y1 = a.y + a.h, x2 = b.x + b.w / 2, y2 = b.y, ym = y1 + Math.min(34, (y2 - y1) / 2); paths += '<path fill="none" stroke="#7c98b6" stroke-width="1.6" id="ed-' + e[0] + '-' + e[1] + '" class="' + (run && run.edges.has(e[0] + '>' + e[1]) ? 'run' : '') + '" d="M' + x1 + ' ' + y1 + ' V' + ym + ' H' + x2 + ' V' + y2 + '"/>'; if (y2 - ym > 30) plus += '<span class="pl" style="left:' + (x2 - 11) + 'px;top:' + ((ym + y2) / 2 - 11) + 'px" data-a="toast" data-v="Read-only: the steps come from the CV">+</span>'; });
+  const nodes = w.nodes.map(n => {
+    const p = P[n.id], st = 'left:' + p.x + 'px;top:' + p.y + 'px;width:' + p.w + 'px;height:' + p.h + 'px;overflow:hidden;', on = run && run.nodes.has(n.id), dim = run && run.done && !on, cls = (on ? ' run' : '') + (dim ? ' dim' : '');
+    if (n.type === 'trigger') return '<div class="nd t' + cls + '" id="nd-' + n.id + '" style="' + st + '"><div style="font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.05em">Enrollment trigger</div><div class="g"><b>Job description:</b> ' + esc(w.name) + '<div style="margin-top:4px">' + esc(n.text) + '</div></div></div>';
+    if (n.type === 'branch') return '<div class="nd b' + cls + '" id="nd-' + n.id + '" style="' + st + '"><div class="hh"><span class="ib">' + ic('route') + '</span>' + nums[n.id] + '. Branch</div><div>' + esc(n.text) + '</div></div>';
+    if (n.type === 'label') return '<div class="nd l' + cls + (S.wfPick === n.text ? ' pick' : '') + '" id="nd-' + n.id + '" data-a="pick" data-v="' + esc(n.text) + '" style="' + st + 'height:' + p.h + 'px" title="Click to choose this branch for the test">' + esc(n.text) + '</div>';
+    if (n.type === 'end') return '<div class="nd e' + cls + '" id="nd-' + n.id + '" style="' + st + 'height:' + p.h + 'px">End</div>';
+    const s = ST[n.strength];
+    return '<div class="nd a ' + n.strength + cls + '" id="nd-' + n.id + '" style="' + st + '" data-a="node" data-v="' + w.key + '/' + n.id + '" tabindex="0"><div class="hh"><span class="ib">' + ic(n.ic) + '</span>' + nums[n.id] + '. ' + esc(n.title) + '</div><div class="tx">' + esc(n.skill) + ': ' + esc(n.text.length > 62 ? n.text.slice(0, 60) + '...' : n.text) + '</div><div class="ft"><span class="chip ' + s[1] + '">' + s[0] + '</span><a>Details</a></div></div>';
+  }).join('');
+  return '<div class="cvi" style="width:' + W + 'px;height:' + H + 'px"><svg class="ed" width="' + W + '" height="' + H + '">' + paths + '</svg>' + plus + nodes + '</div>';
+}
+function vWfEdit(k){
+  const w = WF[k], s = wfStats(w), tabs = [['actions', 'Actions'], ['summary', 'Summary'], ['performance', 'Performance']], branchNode = w.nodes.find(n => n.id === w.branchOf), picks = w.edges.filter(e => e[0] === w.branchOf).map(e => w.nodes.find(n => n.id === e[1]).text);
+  let h = '<div class="wfh"><a data-a="route" data-v="workflows">&lsaquo; Back to workflows</a><h1>' + esc(w.name) + '</h1><span class="sw"></span><span style="font-size:13px">On</span><span style="flex:1"></span><span class="chip g">' + s.strong + ' strong</span><span class="chip a">' + s.partial + ' partial</span>' + (s.ready ? '<span class="chip b">' + s.ready + ' readiness</span>' : '') + '<button class="btn o" data-a="test">' + ic('bolt') + ' Test</button><button class="btn p" data-a="toast" data-v="This workflow is already live">Review and publish</button></div>' +
+    '<div class="wtabs">' + tabs.map(t => '<button class="' + (S.wfTab === t[0] ? 'on' : '') + '" data-a="wtab" data-v="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>';
+  if (S.wfTab === 'actions'){
+    h += '<div class="cv">' + wfCanvas(w) + (S.wfTest ? '<div class="testp"><h4>Test this workflow</h4><div style="color:var(--sub);margin-bottom:8px">' + esc(branchNode.text) + '. Choose a path, then run the test.</div><select class="sel" id="tp" style="width:100%;max-width:none">' + picks.map(p => '<option ' + (S.wfPick === p ? 'selected' : '') + '>' + esc(p) + '</option>').join('') + '</select><div style="margin-top:10px;display:flex;gap:8px"><button class="btn p sm" data-a="run">Run test</button><button class="btn sm" data-a="test">Close</button></div>' + (S.wfRun && S.wfRun.done ? '<ul class="tr">' + S.wfRun.list.map(l => '<li>' + ic('check', 'color:#00bda5') + ' ' + esc(l) + '</li>').join('') + '</ul><div style="margin-top:8px;font-size:12.5px;color:var(--sub)">' + esc(S.wfRun.summary) + '</div>' : '') + '</div>' : '') + '</div>';
+  } else if (S.wfTab === 'summary'){
+    h += '<div class="wsum"><div class="dc"><h3>What the job description asks for</h3><p style="margin:0">' + esc(w.resp.jd) + '</p></div><div class="dc"><h3>How the skills combine</h3>' + w.nodes.filter(n => n.type === 'action').map(n => '<div style="padding:9px 0;border-bottom:1px solid var(--line2)"><div style="display:flex;gap:10px;align-items:center"><b style="font-weight:500">' + esc(n.title) + '</b><span class="chip ' + ST[n.strength][1] + '">' + ST[n.strength][0] + '</span></div><div style="font-size:13px;color:var(--sub)">' + esc(n.text) + '</div><div class="tags" style="margin-top:6px">' + n.ev.map(e => '<a class="chip" data-a="tkopen" data-v="' + e + '">' + esc(tk(e).subject) + '</a>').join('') + '</div></div>').join('') + '</div></div>';
+  } else {
+    const all = s.tickets.map(tk), measured = all.filter(t => t.stage === 'measured' || t.stage === 'adopted').length;
+    h += '<div class="wsum"><div class="dash" style="grid-template-columns:repeat(4,1fr)">' + kpi('Skills in flow', s.n, 'actions in this workflow') + kpi('Strong evidence', s.strong, 'of ' + s.n + ' skills') + kpi('Enrolled tickets', s.tickets.length, 'achievements used as proof') + kpi('In daily use or measured', measured, 'adopted, or with a number on it') + '</div><div class="dc" style="margin-top:14px"><h3>Tickets enrolled in this workflow</h3>' + all.map(t => '<div class="hb" data-a="tkopen" data-v="' + t.id + '" style="cursor:pointer"><span class="l" style="width:330px"><a>' + esc(t.subject) + '</a></span><span class="chip ' + (t.stage === 'measured' ? 'g' : (t.stage === 'adopted' ? 'b' : '')) + '">' + esc(STAGES.find(x => x[0] === t.stage)[1]) + '</span></div>').join('') + '</div></div>';
+  }
+  return h;
+}
+function drawerNode(wk, id){
+  const w = WF[wk], n = w.nodes.find(x => x.id === id), s = ST[n.strength], reqs = [...new Set(n.ev.flatMap(e => tk(e).reqs))];
+  return '<div class="dh"><small>' + esc(w.name) + '</small><h2>' + esc(n.title) + '</h2><button class="dx" data-a="closeDrawer" aria-label="Close">&times;</button></div><div class="db"><div class="tags"><span class="chip ' + s[1] + '">' + s[0] + '</span><span class="chip">Skill: ' + esc(n.skill) + '</span></div><h5>What the job description asks</h5><p style="margin:0">' + esc(n.jd) + '</p><h5>How Andrew meets it</h5><p style="margin:0">' + esc(n.text) + '</p><h5>Evidence (tickets)</h5><div style="display:grid;gap:8px">' + n.ev.map(e => { const t = tk(e); return '<div class="tk" data-a="tkopen" data-v="' + e + '"><a class="tt">' + esc(t.subject) + '</a><div class="r">' + esc(ROLES[t.role].title) + ', ' + esc(t.company) + ' · ' + esc(t.when) + '</div>' + (t.metrics.length ? '<div class="r"><b>' + esc(t.metrics[0][1]) + '</b> ' + esc(t.metrics[0][0].toLowerCase()) + '</div>' : '') + '</div>'; }).join('') + '</div><h5>Requirements it supports</h5><div style="display:grid;gap:6px">' + reqs.map(c => '<div>' + chipReq(c) + ' <span style="font-size:13px">' + esc(REQ[c][0]) + '</span></div>').join('') + '</div>' + (n.strength !== 'strong' ? '<h5>Be straight about it</h5><p style="margin:0;font-size:13.5px">' + (n.strength === 'ready' ? 'This is a readiness claim, not a held title. The next step is formal line management.' : 'The evidence is real but less direct than elsewhere. It is a good thing to explore in conversation.') + '</p>' : '') + '</div>';
+}
+function runPath(w, pick){
+  const byId = {}; w.nodes.forEach(n => { byId[n.id] = n; }); const nodes = [], edges = []; let cur = 't';
+  while (cur){ nodes.push(cur); const ns = w.edges.filter(e => e[0] === cur).map(e => e[1]); if (!ns.length) break; const nx = cur === w.branchOf ? (ns.find(id => byId[id].text === pick) || ns[0]) : ns[0]; edges.push(cur + '>' + nx); cur = nx; }
+  const acts = nodes.map(i => byId[i]).filter(n => n.type === 'action'), strong = acts.filter(a => a.strength === 'strong').length;
+  return { nodes, edges, list: acts.map(a => a.title + ' (' + ST[a.strength][0].toLowerCase() + ')'), summary: acts.length + ' skills used on this path, ' + strong + ' with strong evidence, ' + [...new Set(acts.flatMap(a => a.ev))].length + ' tickets as proof.' };
+}
+function animateRun(w){
+  const r = runPath(w, S.wfPick), run = { nodes: new Set(), edges: new Set(), done: false, list: r.list, summary: r.summary }; S.wfRun = run; let i = 0; document.querySelectorAll('.nd.run,.nd.dim,#page path.run').forEach(x => x.classList.remove('run', 'dim'));
+  const tick = () => { if (S.v !== 'workflows' || S.wfRun !== run) return; const id = r.nodes[i]; if (id === undefined){ run.done = true; renderPage(); toast('Test complete: ' + r.summary); return; } run.nodes.add(id); const el = document.getElementById('nd-' + id); if (el) el.classList.add('run'); if (i > 0){ const e = r.edges[i - 1].replace('>', '-'), p = document.getElementById('ed-' + e); if (p) p.classList.add('run'); run.edges.add(r.edges[i - 1]); } i++; setTimeout(tick, REDUCED ? 0 : 380); };
+  tick();
+}
+const REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+function addMine(subject, desc, impact){ S.mineN += 1; const t = { id: 'TCK-' + (2000 + S.mineN), subject, desc, impact: impact || 'Medium' }; S.mine.unshift(t); S.flash = t.id; save(); return t; }
+function boardFocus(){ S.tf.mode = 'board'; S.collapsed.new = false; if (S.v !== 'tickets'){ go('tickets'); } else render(); setTimeout(() => { S.flash = null; }, 2500); try { const b = document.querySelector('.board'); if (b) b.scrollLeft = 0; } catch (e) {} }
+/* ---------- settings, header icons, pop-downs, login ---------- */
+const ACCENTS = { orange: ['#ff7a59', '#ff8f73', '#e8603f', 'Orange'], teal: ['#00a4bd', '#26b8cd', '#0087a0', 'Teal'], purple: ['#7c5cff', '#9479ff', '#6240e8', 'Purple'], green: ['#00a58e', '#1dbaa3', '#008a77', 'Green'] };
+function applyTheme(){
+  const r = document.documentElement, a = ACCENTS[S.set.accent] || ACCENTS.orange; r.setAttribute('data-theme', S.set.theme);
+  r.style.setProperty('--o', a[0]); r.style.setProperty('--o2', a[1]); r.style.setProperty('--od', a[2]); r.style.setProperty('--bri', String(S.set.bri / 100));
+}
+function popHTML(k){
+  if (k === 'search') return '<div class="pop" role="status"><div class="ph">' + ic('search') + ' Search capabilities in Beta</div></div>';
+  if (k === 'shop') return '<div class="pop" role="status"><div class="ph">' + ic('shop') + ' Coming soon</div></div>';
+  if (k === 'bell') return '<div class="pop" style="width:min(320px,88vw)"><div class="ph">Notifications</div><div class="ni" data-a="read" tabindex="0"><span class="d">' + ic('cal') + '</span><div>Connectd have invited you for an interview<small>' + (S.read ? 'Read' : 'Just now') + '</small></div></div></div>';
+  const st = S.set; return '<div class="pop" style="width:min(300px,90vw)"><div class="ph">Settings</div><label><span>Brightness</span><span id="brl">' + st.bri + '%</span></label><input type="range" id="bri" min="60" max="120" step="5" value="' + st.bri + '" aria-label="Brightness">' +
+    '<label><span>Colour scheme</span></label><div class="seg2"><button data-a="theme" data-v="light" class="' + (st.theme === 'light' ? 'on' : '') + '">Light</button><button data-a="theme" data-v="dark" class="' + (st.theme === 'dark' ? 'on' : '') + '">Dark</button></div>' +
+    '<label><span>Accent colour</span></label><div class="sws">' + Object.keys(ACCENTS).map(k => '<button data-a="accent" data-v="' + k + '" class="' + (st.accent === k ? 'on' : '') + '" style="background:' + ACCENTS[k][0] + '" title="' + ACCENTS[k][3] + '" aria-label="' + ACCENTS[k][3] + '"></button>').join('') + '</div><hr><button class="btn o" data-a="logout" style="width:100%;justify-content:center">Log out</button></div>';
+}
+function renderTic(){
+  const p = S.pop, b = (k, icon, label, extra) => '<span class="rel"><button data-a="pop" data-v="' + k + '" aria-label="' + label + '" aria-expanded="' + (p === k) + '">' + ic(icon, 'font-size:18px') + (extra || '') + '</button>' + (p === k ? popHTML(k) : '') + '</span>';
+  $('#tic').innerHTML = b('search', 'search', 'Search') + b('shop', 'shop', 'Marketplace') + b('settings', 'gear', 'Settings') + b('bell', 'bell', 'Notifications', S.read ? '' : '<span class="bd">1</span>') + '<span class="ava" title="Andrew Latchman">AL</span>';
+}
+function renderLogin(){
+  document.body.classList.toggle('out', S.out);
+  $('#login').innerHTML = S.out ? '<div class="lg"><span class="logo"></span><h1>You have been logged out</h1><p>Thanks for looking around Andrew\'s CRM. Sign back in to carry on where you left off.</p><button class="btn p" data-a="login">Log back in</button></div>' : '';
+}
+/* ---------- shell, layer, events ---------- */
+function renderPage(){ const v = S.v; $('#page').innerHTML = v === 'contacts' ? vContacts() : (v === 'tickets' ? vTickets() : (v === 'dashboards' ? vDash() : (S.id && WF[S.id] ? vWfEdit(S.id) : vWfList()))); }
+function renderLayer(){
+  let h = ''; if (S.drawer){ h += '<div class="shade" data-a="closeDrawer"></div><aside class="drawer" role="dialog" aria-modal="true">' + (S.drawer.type === 'tk' ? drawerTk(S.drawer.id) : (S.drawer.type === 'mine' ? drawerMine(S.drawer.id) : drawerNode(S.drawer.wf, S.drawer.node))) + '</aside>'; }
+  if (S.modal) h += S.modal.type === 'create' ? modalCreate() : (S.modal.type === 'hist' ? modalHist() : (S.modal.type === 'mail' ? modalMail() : (S.modal.type === 'import' ? modalImport() : (S.modal.type === 'copybox' ? modalCopyBox() : ''))));
+  if (S.toastMsg) h += '<div class="toast" role="status">' + esc(S.toastMsg) + '</div>'; $('#layer').innerHTML = h;
+}
+function modalMail(){ const m = S.modal; return '<div class="modal" data-a="closeModal"><div class="dlg" data-stop><div class="mh">Email Andrew<button class="dx" data-a="closeModal" aria-label="Close">&times;</button></div><div class="mb"><p style="margin:0 0 4px;color:var(--sub);font-size:13px">Your email app cannot be opened from inside this preview, so here is the message, ready to copy. On the hosted page the button below opens your email app straight away.</p><label>To</label><input readonly value="' + ME.email + '"><label>Subject</label><input id="ms" value="' + esc(m.subject) + '"><label>Message</label><textarea id="mbd">' + esc(m.body) + '</textarea></div><div class="mf" style="flex-wrap:wrap"><button class="btn p" data-a="copyMsg">Copy message</button><button class="btn" data-a="copy" data-v="' + ME.email + '">Copy email address</button><a class="btn" id="mopen" href="' + mailto(m.subject, m.body) + '" target="_blank" rel="noopener">Open in my email app</a><button class="btn" data-a="closeModal">Close</button></div></div></div>'; }
+function modalCopyBox(){ return '<div class="modal" data-a="closeModal"><div class="dlg" data-stop><div class="mh">Copy this text<button class="dx" data-a="closeModal" aria-label="Close">&times;</button></div><div class="mb"><p style="margin:0 0 4px;color:var(--sub);font-size:13px">Your browser would not let the page use the clipboard, so the text is selected here. Press Ctrl+C (or Cmd+C) to copy it.</p><textarea id="cpb" readonly style="min-height:220px">' + esc(S.modal.text) + '</textarea></div><div class="mf"><button class="btn p" data-a="closeModal">Done</button></div></div></div>'; }
+function modalHist(){ const rows = ['pm', 'prodops', 'globalops', 'opsspec'].map(r => ROLES[r]); return '<div class="modal" data-a="closeModal"><div class="dlg" data-stop><div class="mh">Property history: Job title<button class="dx" data-a="closeModal" aria-label="Close">&times;</button></div><div class="mb">' + rows.map((r, i) => '<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line2)"><span class="chip ' + (i === 0 ? 'g' : '') + '">' + (i === 0 ? 'Current' : 'Previous') + '</span><div><b style="font-weight:500">' + esc(r.title) + '</b><div style="font-size:12.5px;color:var(--sub)">' + esc(r.org + ', ' + r.from + ' to ' + r.to) + '</div></div></div>').join('') + '<p style="color:var(--sub);font-size:13px;margin:12px 0 0">Four promotions or moves in four years, all inside one fast-growing business.</p></div></div></div>'; }
+function render(){
+  $('#menu').innerHTML = VIEWS.map(v => '<a data-a="route" data-v="' + v[0] + '" class="' + (S.v === v[0] ? 'on' : '') + '">' + v[3] + ' ' + ic('down') + '</a>').join('');
+  $('#side').innerHTML = '<h6>Workspace</h6>' + VIEWS.map(v => '<a data-a="route" data-v="' + v[0] + '" class="' + (S.v === v[0] ? 'on' : '') + '">' + ic(v[2], 'font-size:17px') + '<span>' + v[1] + '</span>' + (v[0] === 'tickets' ? '<span class="ct">' + TICKETS.length + '</span>' : '') + '</a>').join('') + '<div class="note">An interactive record built for the Operations Manager role at Connectd. Contacts is the CV, tickets are the achievements, dashboards the KPIs, workflows the skills.</div>';
+  renderPage(); renderLayer(); renderTic();
+}
+function printCV(){
+  const roles = ['pm', 'prodops', 'globalops', 'opsspec', 'bliss', 'bigham', 'earlywmc'].map(r => ROLES[r]);
+  $('#printcv').innerHTML = '<h1>' + ME.name + '</h1><div>' + ME.title + ' · ' + ME.city + ' · ' + ME.email + ' · ' + ME.phone + ' · ' + ME.linkedin + '</div><h2>Profile</h2><p>Full-stack Program Manager who moves between strategy and hands-on delivery. Four years in program and project delivery at Zeelo, the last two and a half inside a lean two-person PMO owning delivery across Operations, Product, Commercial, Finance and Data. Uses AI and automation daily.</p><h2>Experience</h2>' +
+    roles.map(r => '<p><b>' + esc(r.title) + '</b>, ' + esc(r.org) + ' (' + esc(r.from + (r.to !== r.from ? ' to ' + r.to : '')) + ')<br>' + esc(r.summary) + '</p>' + (TICKETS.filter(t => t.role === r.id).length ? '<ul>' + TICKETS.filter(t => t.role === r.id).map(t => '<li>' + esc(t.subject) + ': ' + esc(t.outcome) + '</li>').join('') + '</ul>' : '')).join('') + '<h2>Education</h2><p>BA Business Studies with Marketing, 2:1, Bournemouth University (2015 to 2019)</p><h2>Toolkit</h2><p>HubSpot, Monday.com, eduMe, n8n, Zapier, Synthesia, Canva, Figma, Google Workspace, Claude and ChatGPT (daily).</p>';
+  try { window.print(); } catch (e) { toast('Printing is not available here'); }
+}
+const ACT = {
+  pop(v){ S.pop = S.pop === v ? null : v; S.menu = null; renderTic(); },
+  read(){ S.read = true; renderTic(); },
+  theme(v){ S.set.theme = v; applyTheme(); save(); renderTic(); },
+  accent(v){ S.set.accent = v; applyTheme(); save(); renderTic(); },
+  logout(){ S.pop = null; S.out = true; renderTic(); renderLogin(); },
+  login(){ S.out = false; renderLogin(); toast('Welcome back'); },
+  route(v){ S.menu = null; S.drawer = null; S.modal = null; go(v); },
+  toast(v){ toast(v); },
+  tab(v){ S.tab = v; S.menu = null; if (S.v !== 'contacts') go('contacts'); else render(); },
+  tgl(v){ S.open[v] = !(S.open[v] !== undefined ? S.open[v] : S.open.__all === true); render(); },
+  expand(v){ S.open = { __all: v === '1' }; render(); },
+  af(v){ S.af[v] = !S.af[v]; render(); },
+  menu(v){ S.menu = S.menu === v ? null : v; render(); },
+  task(v){ S.tasks[v] = !S.tasks[v]; save(); render(); },
+  rc(v){ S.rc[v] = !S.rc[v]; render(); },
+  props(){ S.props = !S.props; S.menu = null; render(); },
+  hist(){ S.modal = { type: 'hist' }; render(); },
+  copy(v){ copyText(v, v.includes('@') ? 'Email address copied' : 'Number copied'); },
+  print(){ S.menu = null; render(); printCV(); },
+  tkopen(v){ S.drawer = { type: 'tk', id: v }; if (S.v !== 'tickets'){ S.v = 'tickets'; renderPage(); } urlSet('#/tickets/' + v); renderLayer(); renderNav(); },
+  closeDrawer(){ const tix = S.drawer && S.drawer.type === 'tk'; S.drawer = null; if (S.v === 'tickets' && S.id) urlSet('#/tickets'); if (S.v === 'workflows' && S.sub) urlSet('#/workflows/' + S.id); S.id = S.v === 'workflows' ? S.id : null; S.sub = null; renderLayer(); },
+  tknav(v){ const list = ftickets(), i = list.findIndex(t => t.id === S.drawer.id), n = list[(i + Number(v) + list.length) % list.length]; if (n) ACT.tkopen(n.id); },
+  mode(v){ S.tf.mode = v; render(); }, clear(){ S.tf = Object.assign(S.tf, { q: '', req: '', company: '', tool: '', impact: '', role: '', view: 'all' }); render(); },
+  fp(){ S.fp = !S.fp; render(); }, colTgl(v){ S.collapsed[v] = !S.collapsed[v]; render(); }, colAll(v){ S.menu = null; const keys = ['new'].concat(S.tf.pipeline === 'delivery' ? STAGES.map(s => s[0]) : Object.keys(RESP)); keys.forEach(k => { S.collapsed[k] = v === '1'; }); render(); },
+  saveView(){ S.saved = JSON.stringify(S.tf); save(); toast('View saved: ' + ftickets().length + ' tickets'); render(); },
+  create(){ S.menu = null; S.modal = { type: 'create', name: '', body: '', pr: 'Medium', err: false }; render(); setTimeout(() => { const i = $('#cn'); if (i) i.focus(); }, 0); },
+  createSave(){ const m = S.modal; if (!m.name.trim()){ m.err = true; renderLayer(); return; } addMine(m.name.trim(), m.body.trim(), m.pr); S.modal = null; boardFocus(); toast('Ticket created. It is in the New ticket column.'); },
+  import(){ S.menu = null; S.modal = { type: 'import', text: '', err: false }; render(); setTimeout(() => { const i = $('#ib'); if (i) i.focus(); }, 0); },
+  importSave(){ const m = S.modal, lines = m.text.split('\n').map(x => x.replace(/^\s*(?:[-*\u2022]|\d+[.)])\s*/, '').trim()).filter(Boolean).slice(0, 25); if (!lines.length){ m.err = true; renderLayer(); return; } lines.forEach(l => addMine(l.slice(0, 140), '', 'Medium')); S.modal = null; boardFocus(); toast(lines.length + ' ticket' + (lines.length === 1 ? '' : 's') + ' imported into New ticket.'); },
+  mineopen(v){ S.drawer = { type: 'mine', id: v }; renderLayer(); },
+  delMine(v){ S.mine = S.mine.filter(t => t.id !== v); S.drawer = null; save(); render(); toast('Ticket deleted'); },
+  mailMine(v){ const t = S.mine.find(x => x.id === v); if (t) sendMail(t.subject, t.desc ? t.desc + '\n\nThanks' : 'Hi Andrew,\n\n'); },
+  clearMine(){ S.menu = null; const n = S.mine.length; S.mine = []; save(); render(); toast('Deleted ' + n + ' ticket' + (n === 1 ? '' : 's')); },
+  copyTickets(){ S.menu = null; render(); copyText('Andrew Latchman: achievements as tickets\n\n' + TICKETS.map(t => t.id + ' | ' + STAGES.find(x => x[0] === t.stage)[1] + ' | ' + t.impact + ' impact | ' + t.subject + ' | ' + t.outcome).join('\n'), 'Copied all ' + TICKETS.length + ' tickets'); },
+  mail(v){ const m = MAILS[v]; if (m) sendMail(m[0], m[1]); },
+  copyMsg(){ const m = S.modal; copyText('To: ' + ME.email + '\nSubject: ' + (m.subject || '') + '\n\n' + (m.body || ''), 'Message copied'); },
+  closeModal(){ S.modal = null; renderLayer(); },
+  tkTool(v){ S.tf = Object.assign(S.tf, { q: '', req: '', company: '', impact: '', role: '', view: 'all', tool: v }); S.fp = true; S.drawer = null; go('tickets'); },
+  tkCo(v){ S.tf = Object.assign(S.tf, { q: '', req: '', tool: '', impact: '', role: '', view: 'all', company: v }); S.fp = true; go('tickets'); },
+  tkReq(v){ S.tf = Object.assign(S.tf, { q: '', company: '', tool: '', impact: '', role: '', view: 'all', req: v }); S.fp = true; go('tickets'); },
+  tkrole(v){ S.tf = Object.assign(S.tf, { q: '', company: '', tool: '', impact: '', req: '', view: 'all', role: v }); S.fp = true; go('tickets'); },
+  barGo(v){ ACT.tkrole(v); }, pieGo(v){ S.tf = Object.assign(S.tf, { q: '', company: '', tool: '', impact: '', role: '', req: '', view: 'all', pipeline: 'jd' }); S.fp = false; go('tickets'); },
+  wtab(v){ S.wfTab = v; renderPage(); },
+  node(v){ const [k, n] = v.split('/'); S.drawer = { type: 'node', wf: k, node: n }; urlSet('#/workflows/' + k + '/' + n); S.id = k; S.sub = n; renderLayer(); },
+  test(){ S.wfTest = !S.wfTest; if (S.wfTest){ const w = WF[S.id], picks = w.edges.filter(e => e[0] === w.branchOf).map(e => w.nodes.find(n => n.id === e[1]).text); S.wfPick = S.wfPick && picks.includes(S.wfPick) ? S.wfPick : picks[0]; } else S.wfRun = null; renderPage(); },
+  pick(v){ S.wfPick = v; S.wfTest = true; renderPage(); },
+  run(){ const sel = $('#tp'); if (sel) S.wfPick = sel.value; animateRun(WF[S.id]); },
+  srch(){ S.tab = 'activity'; go('contacts'); setTimeout(() => { const i = $('#aq'); if (i) i.focus(); }, 0); }
+};
+function renderNav(){ $('#menu').innerHTML = VIEWS.map(v => '<a data-a="route" data-v="' + v[0] + '" class="' + (S.v === v[0] ? 'on' : '') + '">' + v[3] + ' ' + ic('down') + '</a>').join(''); }
+document.addEventListener('click', e => {
+  if (S.pop && !e.target.closest('#tic .rel')){ S.pop = null; renderTic(); }
+  const t = e.target.closest('[data-a]');
+  if (e.target.closest('[data-stop]') && !(t && !t.classList.contains('modal'))) return;
+  if (!t){ if (S.menu){ S.menu = null; render(); } return; }
+  if (t.classList.contains('modal') && e.target.closest('[data-stop]')) return;
+  const f = ACT[t.dataset.a]; if (f){ if (t.tagName !== 'A' || !t.getAttribute('href')) e.preventDefault(); try { f(t.dataset.v, t, e); } catch (err) { try { toast('Something went wrong, please try again'); } catch (e2) {} } }
+});
+function keepFocus(id, fn){ const el = $('#' + id), pos = el ? el.selectionStart : 0; fn(); const n = $('#' + id); if (n){ n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} } }
+document.addEventListener('input', e => {
+  if (e.target.id === 'bri'){ S.set.bri = Number(e.target.value); applyTheme(); const l = $('#brl'); if (l) l.textContent = S.set.bri + '%'; save(); return; }
+  if (e.target.id === 'tq'){ S.tf.q = e.target.value; keepFocus('tq', renderPage); } else if (e.target.id === 'aq'){ S.aq = e.target.value; keepFocus('aq', renderPage); }
+  else if (e.target.id === 'cn' && S.modal){ S.modal.name = e.target.value; } else if (e.target.id === 'cb' && S.modal){ S.modal.body = e.target.value; }
+  else if (e.target.id === 'ib' && S.modal){ S.modal.text = e.target.value; const b = document.querySelector('[data-a="importSave"]'), n = S.modal.text.split('\n').filter(x => x.trim()).length; if (b) b.textContent = 'Import' + (n ? ' ' + n + ' ticket' + (n === 1 ? '' : 's') : ''); }
+  else if ((e.target.id === 'ms' || e.target.id === 'mbd') && S.modal){ if (e.target.id === 'ms') S.modal.subject = e.target.value; else S.modal.body = e.target.value; const a = $('#mopen'); if (a) a.href = mailto(S.modal.subject, S.modal.body); }
+});
+document.addEventListener('change', e => {
+  const t = e.target; if (t.id === 'pipe'){ S.tf.pipeline = t.value; render(); } else if (t.id === 'vw'){ S.tf.view = t.value; render(); } else if (t.dataset && t.dataset.f){ S.tf[t.dataset.f] = t.value; render(); } else if (t.id === 'dsel'){ S.dsh = t.value; go('dashboards/' + t.value); } else if (t.id === 'dco'){ S.dco = t.value; render(); } else if (t.id === 'tp'){ S.wfPick = t.value; } else if (t.id === 'cp' && S.modal){ S.modal.pr = t.value; } else if (t.id === 'if' && S.modal && t.files && t.files[0]){ const rd = new FileReader(); rd.onload = () => { S.modal.text = String(rd.result || ''); renderLayer(); }; rd.readAsText(t.files[0]); }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){ if (S.pop){ S.pop = null; renderTic(); return; } if (S.modal) ACT.closeModal(); else if (S.drawer) ACT.closeDrawer(); else if (S.menu){ S.menu = null; render(); } return; }
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-a][tabindex]')){ e.preventDefault(); const f = ACT[e.target.dataset.a]; if (f) f(e.target.dataset.v, e.target, e); }
+});
+const tipEl = document.createElement('div'); tipEl.className = 'tip'; tipEl.hidden = true; document.body.appendChild(tipEl);
+document.addEventListener('mouseover', e => { const t = e.target.closest && e.target.closest('[data-tip]'); if (t){ tipEl.textContent = t.dataset.tip; tipEl.hidden = false; } else tipEl.hidden = true; });
+document.addEventListener('mousemove', e => { if (!tipEl.hidden){ tipEl.style.left = (e.clientX + 14) + 'px'; tipEl.style.top = (e.clientY + 14) + 'px'; } });
+applyTheme(); renderLogin();
+window.__crm = { S, ACT, renderTic, applyTheme, go, ftickets, runPath, WF, wfStats, render, vDash, vWfEdit };
+sync(); render();
+
+})();
+</script>
+</body>
+</html>
